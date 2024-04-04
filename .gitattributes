@@ -1,0 +1,6 @@
+# Don't encrypt this file
+.gitattributes !filter !diff
+
+# Encrypt *.key files and all files inside secrets/
+*.key filter=git-crypt diff=git-crypt
+secrets/** filter=git-crypt diff=git-crypt
