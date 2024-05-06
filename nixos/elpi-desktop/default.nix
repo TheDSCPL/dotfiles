@@ -33,8 +33,8 @@ in
         type = lib.types.str;
         example = "elpi-desktop";
       };
-      user.username = lib.str {
-        type = lib.types.string;
+      user.username = lib.mkOption {
+        type = lib.types.str;
         example = "elpi";
       };
       user.name = lib.mkOption {
