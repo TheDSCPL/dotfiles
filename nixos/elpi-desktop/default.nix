@@ -49,9 +49,9 @@ in
     };
   };
   imports = [
-    ({ config, ... }: { config._module.args = { inherit pkgs inputs; }; })
+    #({ config, ... }: { config._module.args = { inherit pkgs inputs; }; })
     ./hardware-configuration.nix
-    ./ui-sound.nix
+    #./ui-sound.nix
     # ./hardened.nix
   ];
   config = {
