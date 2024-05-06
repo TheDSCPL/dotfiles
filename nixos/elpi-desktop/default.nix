@@ -30,7 +30,7 @@ in
   options = {
     hostConsts = {
       hostname = lib.mkOption {
-        type = lib.types.str;
+        type = lib.types.unique lib.types.str;
         example = "elpi-desktop";
       };
       user.username = lib.mkOption {
@@ -79,6 +79,7 @@ in
 
     # Keyboard Configuration
     services.xserver.xkb.layout = keyboardLayout;
+    i18n.consoleUseXkbConfig = true;
 
     # NVIDIA
     services.xserver.videoDrivers = [ "nvidia" ];
