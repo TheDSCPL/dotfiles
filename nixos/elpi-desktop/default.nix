@@ -30,7 +30,7 @@ in
   options = {
     hostConsts = {
       hostname = lib.mkOption {
-        type = lib.types.unique lib.types.str;
+        type = lib.types.uniq lib.types.str;
         example = "elpi-desktop";
       };
       user.username = lib.mkOption {
