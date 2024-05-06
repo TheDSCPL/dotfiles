@@ -75,7 +75,8 @@ in
 
     # Console Configuration 
     console.font = "Lat2-Terminus16";
-    console.keyMap = "pt";
+    services.xserver.layout = "pt";
+    # console.keyMap = "pt";
 
     # NVIDIA
     services.xserver.videoDrivers = [ "nvidia" ];
