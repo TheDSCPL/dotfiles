@@ -30,19 +30,19 @@ in
   options = {
     hostConsts = {
       hostname = lib.mkOption {
-        type = lib.types.string;
+        type = lib.types.str;
         example = "elpi-desktop";
       };
-      user.username = lib.mkOption {
+      user.username = lib.str {
         type = lib.types.string;
         example = "elpi";
       };
       user.name = lib.mkOption {
-        type = lib.types.string;
+        type = lib.types.str;
         example = "Elpi";
       };
       timezone = lib.mkOption {
-        type = lib.types.string;
+        type = lib.types.str;
         example = "Atlantic/Azores";
         default = "Atlantic/Azores";
       };
@@ -54,7 +54,7 @@ in
     #./ui-sound.nix
     # ./hardened.nix
   ];
-  config = {
+  config = let keyboardLayout = "pt"; in {
     # Linux Kernel
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -75,8 +75,8 @@ in
 
     # Console Configuration 
     console.font = "Lat2-Terminus16";
-    services.xserver.layout = "pt";
-    # console.keyMap = "pt";
+    services.xserver.xkb.layout = keyboardLayout;
+    console.keyMap = keyboardLayout;
 
     # NVIDIA
     services.xserver.videoDrivers = [ "nvidia" ];
