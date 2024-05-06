@@ -75,8 +75,10 @@ in
 
     # Console Configuration 
     console.font = "Lat2-Terminus16";
+    # console.keyMap = keyboardLayout;
+
+    # Keyboard Configuration
     services.xserver.xkb.layout = keyboardLayout;
-    console.keyMap = keyboardLayout;
 
     # NVIDIA
     services.xserver.videoDrivers = [ "nvidia" ];
