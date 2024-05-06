@@ -73,13 +73,12 @@ in
     # Timezone 
     time.timeZone = hostConsts.timezone;
 
-    # Console Configuration 
-    console.font = "Lat2-Terminus16";
-    # console.keyMap = keyboardLayout;
-
     # Keyboard Configuration
     services.xserver.xkb.layout = keyboardLayout;
-    i18n.consoleUseXkbConfig = true;
+
+    # Console Configuration 
+    console.font = "Lat2-Terminus16";
+    console.useXkbConfig = true;
 
     # NVIDIA
     services.xserver.videoDrivers = [ "nvidia" ];
