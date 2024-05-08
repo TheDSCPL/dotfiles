@@ -110,6 +110,8 @@ in
       shell = pkgs.zsh;
     };
     programs.zsh.enable = true;
+    environment.shells = [ pkgs.zsh ];
+    users.defaultUserShell = pkgs.zsh;
 
     # Essential system packages
     environment.systemPackages = with pkgs; [
