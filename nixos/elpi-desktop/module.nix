@@ -32,7 +32,7 @@ in
   ];
   config = let keyboardLayout = "pt"; in {
     # Linux Kernel
-    boot.kernelPackages = traceVerbose pkgs.linuxPackages_latest.nvidiaPackages pkgs.linuxPackages_latest;
+    boot.kernelPackages = builtins.traceVerbose pkgs.linuxPackages_latest.nvidiaPackages pkgs.linuxPackages_latest;
 
     # Nix configurations
     system.stateVersion = "23.11";
