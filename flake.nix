@@ -6,25 +6,6 @@
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations.elpi-desktop = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        # Module knobs
-        ({...}: {
-          config.hostConsts = {
-            hostname = "elpi-desktop";
-            timezone = "Atlantic/Azores";
-            user = {
-              username = "elpi";
-              name = "Elpi";
-            };
-          };
-        })
-        ./nixos/elpi-desktop
-      ];
-      specialArgs = {
-        inherit inputs;
-      };
-    };
+    nixosConfigurations.elpi-desktop = import ./nixos/elpi-desktop inputs;
   };
 }
