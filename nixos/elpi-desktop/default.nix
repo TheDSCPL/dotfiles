@@ -1,30 +1,6 @@
 {config, lib, pkgs, inputs, ...}:
 let
   hostConsts = config.hostConsts;
-  dbus-hyprland-environment = pkgs.writeTextFile {
-    name = "dbus-hyprland-environment";
-    destination = "/bin/dbus-hyprland-environment";
-    executable = true;
-
-    text = ''
-      dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=hyprland
-      systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-      systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-    '';
-  };
-  configure-gtk = pkgs.writeTextFile {
-    name = "configure-gtk";
-    destination = "/bin/configure-gtk";
-    executable = true;
-    text = let
-      schema = pkgs.gsettings-desktop-schemas;
-      datadir = "${schema}/share/gesettings/schemas/${schema.name}";
-    in ''
-      export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-      gnome_schema=org.gnome.desktop.interface
-      gesettings set $gnome_schema gtk-theme 'Adwaita'
-    '';
-  };
 in
 {
   options = {
@@ -51,7 +27,7 @@ in
   imports = [
     #({ config, ... }: { config._module.args = { inherit pkgs inputs; }; })
     ./hardware-configuration.nix
-    #./ui-sound.nix
+    ./ui-sound.nix
     # ./hardened.nix
   ];
   config = let keyboardLayout = "pt"; in {
@@ -123,7 +99,6 @@ in
       firefox
       chromium
       gnome.adwaita-icon-theme
-      dbus-hyprland-environment
       configure-gtk
       cryptsetup
     ];
