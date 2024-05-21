@@ -37,11 +37,40 @@
       # networkmanagerapplet
     ];
 
-    # Wayland configs
-    # https://gist.github.com/sioodmy/1932583dd8a804e0b3fe86416b923a16#tweak-your-configurationnix
+    # NVIDIA
+    services.xserver.videoDrivers = [ "nvidia" ];
+    hardware = {
+      nvidia = {
+        open = true;
+        powerManagement.enable = true;
+        modesetting.enable = true;
+        nvidiaPersistenced = true;
+      };
+      opengl = {
+        enable = true;
+        driSupport = true;
+        driSupport32Bit = true;
+        extraPackages = with pkgs; [
+          libva
+          nvidia-vaapi-driver # LIBVA_DRIVER_NAME = "nvidia"
+          intel-media-driver  # LIBVA_DRIVER_NAME = "iHD"
+          vaapiVdpau
+          libvdpau-va-gl
+        ];
+      };
+      # pulseaudio.support32Bit = true;
+    };
+
     environment = {
       noXlibs = true;
       variables = {
+        # VA-API NVIDIA
+        LIBVA_DRIVER_NAME = "nvidia";
+        PROTON_ENABLE_NVAPI="1";
+        DXVK_ENABLE_NVAPI="1";
+      } // {
+        # https://gist.github.com/sioodmy/1932583dd8a804e0b3fe86416b923a16#tweak-your-configurationnix
+        # Wayland configs
         NIXOS_OZONE_WL = "1";
         GBM_BACKEND = "nvidia-drm";
         __GL_GSYNC_ALLOWED = "0";
@@ -49,6 +78,7 @@
         DIRENV_LOG_FORMAT = "";
         __NV_PRIME_RENDER_OFFLOAD = "1";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        __VK_LAYER_NV_optimus = "NVIDIA_only";
         QT_QPA_PLATFORM = "wayland";
         QT_QPA_PLATFORMTHEME = "qt5ct";
         MOZ_ENABLE_WAYLAND = "1";

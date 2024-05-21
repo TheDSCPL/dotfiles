@@ -55,36 +55,6 @@ in
     console.font = "Lat2-Terminus16";
     console.useXkbConfig = true;
 
-    # NVIDIA
-    services.xserver.videoDrivers = [ "nvidia" ];
-    hardware = {
-      nvidia = {
-        open = true;
-        powerManagement.enable = true;
-        modesetting.enable = true;
-        nvidiaPersistenced = true;
-      };
-      opengl = {
-        enable = true;
-        driSupport = true;
-        driSupport32Bit = true;
-        extraPackages = with pkgs; [
-          libva
-          nvidia-vaapi-driver # LIBVA_DRIVER_NAME = "nvidia"
-          intel-media-driver  # LIBVA_DRIVER_NAME = "iHD"
-          vaapiVdpau
-          libvdpau-va-gl
-        ];
-      };
-      # pulseaudio.support32Bit = true;
-    };
-    environment.variables = {
-      # VA-API NVIDIA
-      __NV_PRIME_RENDER_OFFLOAD = 1;
-      __VK_LAYER_NV_optimus = "NVIDIA_only";
-      LIBVA_DRIVER_NAME = "nvidia";
-    };
-
     # User Configuration (Create your user)
     users.users.elpi = {
       isNormalUser = true;
