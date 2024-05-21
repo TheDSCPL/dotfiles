@@ -99,6 +99,7 @@ in
       chromium
       gnome.adwaita-icon-theme
       cryptsetup
+      libva
     ];
 
     # Optional Services (Uncomment and configure as needed)
