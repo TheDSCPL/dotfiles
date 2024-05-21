@@ -68,9 +68,11 @@ in
       };
       opengl = {
         enable = true;
+        package = pkgs-unstable.mesa.drivers;
+        package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
         driSupport = true;
         driSupport32Bit = true;
-        extraPackages = with pkgs; [
+        extraPackages = with pkgs-unstable; [
           vaapiVdpau
           libvdpau-va-gl
           nvidia-vaapi-driver
