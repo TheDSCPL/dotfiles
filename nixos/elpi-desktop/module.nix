@@ -99,7 +99,6 @@ in
       firefox
       chromium
       gnome.adwaita-icon-theme
-      configure-gtk
       cryptsetup
     ];
 
