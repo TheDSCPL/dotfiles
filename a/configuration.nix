@@ -71,7 +71,7 @@ in
         nvidia-vaapi-driver
       ];
     };
-    pulseaudio.support32Bit = true;
+    #pulseaudio.support32Bit = true;
   };
 
   # Pipewire
