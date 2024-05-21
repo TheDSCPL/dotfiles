@@ -12,7 +12,7 @@
         };
       };
     })
-    ./overlays/gnome-mutter-triple-buffering
+    # ./overlays/gnome-mutter-triple-buffering
     ./module
   ];
   specialArgs = {
