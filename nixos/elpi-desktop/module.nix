@@ -37,7 +37,6 @@ in
 
     # Nix configurations
     system.stateVersion = "23.11";
-    nixpkgs.config.allowUnfree = true;
     hardware.enableRedistributableFirmware = true;
     nix.package = pkgs.nixFlakes;
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
