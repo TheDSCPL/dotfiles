@@ -1,6 +1,7 @@
-{config, lib, pkgs, flakeInputs, ...}@inputs:
+{config, lib, pkgs, pkgs-unstable, flakeInputs, ...}@inputs:
 let
   hostConsts = config.hostConsts;
+  nixpkgs-unstable = flakeInputs.nixpkgs-unstable;
 in
 {
   options = {
@@ -32,7 +33,7 @@ in
   ];
   config = let keyboardLayout = "pt"; in {
     # Linux Kernel
-    boot.kernelPackages = builtins.abort pkgs.linuxPackages_latest.nvidiaPackages;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # Nix configurations
     system.stateVersion = "23.11";
@@ -61,6 +62,7 @@ in
     hardware = {
       nvidia = {
         open = true;
+        package = pkgs-unstable.linuxPackages_latest.nvidiaPackages.latest;
         powerManagement.enable = true;
         modesetting.enable = true;
         nvidiaPersistenced = true;
