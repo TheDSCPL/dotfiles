@@ -33,7 +33,7 @@ in nixpkgs.lib.nixosSystem {
       };
     })
     gnome-mutter-triple-buffering
-    ./module
+    ./module.nix
   ];
   specialArgs = {
     flakeInputs = inputs;
