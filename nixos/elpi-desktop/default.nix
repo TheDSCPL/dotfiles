@@ -1,8 +1,11 @@
-{ nixpkgs, nixpkgs-unstable, ... }@inputs:
+{ nixpkgs, ... }@inputs:
 let
-  gnome-mutter-triple-buffering =
-    { pkgs, ... }: {
-      nixpkgs.overlays = [
+  system = "x86_64-linux";
+  pkgs = import nixpkgs {
+    inherit system;
+    config = {
+      allowUnfree = true;
+      overlays = [
         # GNOME 46: triple-buffering-v4-46
         (final: prev: {
           gnome = prev.gnome.overrideScope (gnomeFinal: gnomePrev: {
@@ -19,15 +22,7 @@ let
         })
       ];
     };
-  system = "x86_64-linux";
-  nixpkgsConfig = {
-    inherit system;
-    config = {
-      allowUnfree = true;
-    };
   };
-  pkgs = import nixpkgs nixpkgsConfig;
-  pkgs-unstable = import nixpkgs-unstable nixpkgsConfig;
 in nixpkgs.lib.nixosSystem {
   inherit system pkgs;
   modules = [
@@ -42,11 +37,9 @@ in nixpkgs.lib.nixosSystem {
         };
       };
     })
-    gnome-mutter-triple-buffering
     ./module.nix
   ];
   specialArgs = {
-    inherit pkgs-unstable;
     flakeInputs = inputs;
   };
 }

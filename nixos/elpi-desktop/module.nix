@@ -1,7 +1,6 @@
-{config, lib, pkgs, pkgs-unstable, flakeInputs, ...}@inputs:
+{config, lib, pkgs, flakeInputs, ...}@inputs:
 let
   hostConsts = config.hostConsts;
-  nixpkgs-unstable = flakeInputs.nixpkgs-unstable;
 in
 {
   options = {
@@ -61,18 +60,15 @@ in
     hardware = {
       nvidia = {
         open = true;
-        package = pkgs-unstable.linuxPackages_latest.nvidiaPackages.latest;
         powerManagement.enable = true;
         modesetting.enable = true;
         nvidiaPersistenced = true;
       };
       opengl = {
         enable = true;
-        package = pkgs-unstable.mesa.drivers;
-        package32 = pkgs-unstable.pkgsi686Linux.mesa.drivers;
         driSupport = true;
         driSupport32Bit = true;
-        extraPackages = with pkgs-unstable; [
+        extraPackages = with pkgs; [
           vaapiVdpau
           libvdpau-va-gl
           nvidia-vaapi-driver
