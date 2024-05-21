@@ -69,12 +69,20 @@ in
         driSupport = true;
         driSupport32Bit = true;
         extraPackages = with pkgs; [
+          libva
+          nvidia-vaapi-driver # LIBVA_DRIVER_NAME = "nvidia"
+          intel-media-driver  # LIBVA_DRIVER_NAME = "iHD"
           vaapiVdpau
           libvdpau-va-gl
-          nvidia-vaapi-driver
         ];
       };
       # pulseaudio.support32Bit = true;
+    };
+    environment.variables = {
+      # VA-API NVIDIA
+      __NV_PRIME_RENDER_OFFLOAD = 1;
+      __VK_LAYER_NV_optimus = "NVIDIA_only";
+      LIBVA_DRIVER_NAME = "nvidia";
     };
 
     # User Configuration (Create your user)
@@ -99,7 +107,6 @@ in
       chromium
       gnome.adwaita-icon-theme
       cryptsetup
-      libva
     ];
 
     # Optional Services (Uncomment and configure as needed)
