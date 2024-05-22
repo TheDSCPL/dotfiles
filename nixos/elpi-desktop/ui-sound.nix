@@ -56,6 +56,10 @@
           intel-media-driver  # LIBVA_DRIVER_NAME = "iHD"
           vaapiVdpau
           libvdpau-va-gl
+          # Vulkan
+          vulkan-tools
+          # DirectX 9, 10 and 11
+          dxvk
         ];
       };
       # pulseaudio.support32Bit = true;
@@ -68,6 +72,7 @@
         LIBVA_DRIVER_NAME = "nvidia";
         PROTON_ENABLE_NVAPI="1";
         DXVK_ENABLE_NVAPI="1";
+        NVD_BACKEND = "direct";
       } // {
         # https://gist.github.com/sioodmy/1932583dd8a804e0b3fe86416b923a16#tweak-your-configurationnix
         # Wayland configs

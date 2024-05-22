@@ -73,7 +73,7 @@ in
       vim
       wget
       curl
-      firefox
+      firefox-devedition
       chromium
       gnome.adwaita-icon-theme
       cryptsetup

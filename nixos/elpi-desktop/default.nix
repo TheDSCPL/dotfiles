@@ -5,6 +5,8 @@ let
     inherit system;
     config = {
       allowUnfree = true;
+      firefox.enableAdobeFlash = true;
+      chromium.enablePepperFlash = true;
       overlays = [
         # GNOME 46: triple-buffering-v4-46
         (final: prev: {
