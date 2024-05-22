@@ -54,7 +54,7 @@
           libva
           nvidia-vaapi-driver # LIBVA_DRIVER_NAME = "nvidia"
           intel-media-driver  # LIBVA_DRIVER_NAME = "iHD"
-          vaapiVdpau
+          # vaapiVdpau
           libvdpau-va-gl
           # Vulkan
           vulkan-tools
