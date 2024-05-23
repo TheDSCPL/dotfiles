@@ -2,7 +2,7 @@
   description = "My desktop configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "path:./flakeModules/nixpkgs-hybrid";
   };
 
   outputs = { self, ... }@inputs: {
