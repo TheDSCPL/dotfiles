@@ -7,8 +7,8 @@ let
       allowUnfree = true;
       firefox.enableAdobeFlash = true;
       overlays = [
-        # Update wayland to 1.22.93
         (final: prev: {
+          # Update wayland to 1.22.93
           wayland = prev.wayland.overrideAttrs (oldAttrs: let version = "1.22.93"; in {
             inherit version;
             src = builtins.fetchurl {
@@ -16,19 +16,15 @@ let
               sha256 = "sha256-3d8545356d83330db3fcf4adbd30a138bebbc28904a0068983b64ef40182a94f";
             };
           });
+          # Update gom to 0.5.1
+          gom = prev.gom.overrideAttrs (oldAttrs: let version = "0.5.1"; in {
+            inherit version;
+            src = builtins.fetchurl {
+              url = "mirror://gnome/sources/${oldAttrs.pname}/${nixpkgs.lib.versions.majorMinor version}/${oldAttrs.pname}-${version}.tar.xz";
+              sha256 = "sha256-15dc4d1302f8210cf08ccba9b2696417fd946d9911bbaf5183cbe36d25d570e0";
+            };
+          });
         })
-        # Update gom to 0.5.1
-        (
-          final: prev: {
-            gom = prev.gom.overrideAttrs (oldAttrs: let version = "0.5.1"; in {
-              inherit version;
-              src = builtins.fetchurl {
-                url = "mirror://gnome/sources/${oldAttrs.pname}/${nixpkgs.lib.versions.majorMinor version}/${oldAttrs.pname}-${version}.tar.xz";
-                sha256 = "sha256-15dc4d1302f8210cf08ccba9b2696417fd946d9911bbaf5183cbe36d25d570e0";
-              };
-            });
-          }
-        )
         # GNOME 46: triple-buffering-v4-46
         (final: prev: {
           gnome = prev.gnome.overrideScope (gnomeFinal: gnomePrev: {
