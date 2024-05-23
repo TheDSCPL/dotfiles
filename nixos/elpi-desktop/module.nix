@@ -77,7 +77,7 @@ in
       chromium
       gnome.adwaita-icon-theme
       cryptsetup
-      builtins.trace wayland
+      builtins.trace wayland wayland
     ];
 
     # Optional Services (Uncomment and configure as needed)
