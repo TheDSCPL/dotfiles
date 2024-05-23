@@ -46,7 +46,7 @@ let
       ];
     };
   };
-in nixpkgs.lib.nixosSystem {
+in pkgs.lib.nixosSystem {
   inherit system pkgs;
   modules = [
     # Module knobs
