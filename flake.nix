@@ -31,7 +31,7 @@
     };
   in {
     nixosConfigurations.elpi-desktop = import ./nixos/elpi-desktop (
-      args // { nixpkgs = nixpkgs-hyb; }
+      builtins.removeAttrs (args // { nixpkgs = nixpkgs-hyb; }) [ "nixpkgs-stable" ]
     );
   };
 }

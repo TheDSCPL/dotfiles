@@ -1,4 +1,4 @@
-{ nixpkgs, ... }@inputs:
+{ nixpkgs, ... }@args:
 let
   system = "x86_64-linux";
   pkgs = import nixpkgs {
@@ -41,6 +41,6 @@ in nixpkgs.lib.nixosSystem {
     ./module.nix
   ];
   specialArgs = {
-    flakeInputs = inputs;
+    inherit args;
   };
 }

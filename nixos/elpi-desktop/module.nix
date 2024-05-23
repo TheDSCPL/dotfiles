@@ -1,4 +1,4 @@
-{config, lib, pkgs, flakeInputs, ...}@inputs:
+{config, lib, pkgs, ...}@inputs:
 let
   hostConsts = config.hostConsts;
 in
