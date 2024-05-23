@@ -27,7 +27,7 @@ in
   imports = [
     #({ config, ... }: { config._module.args = { inherit pkgs flakeInputs; }; })
     ./hardware-configuration.nix
-    ./ui-sound.nix
+    # ./ui-sound.nix
     # ./hardened.nix
   ];
   config = let keyboardLayout = "pt"; in {
