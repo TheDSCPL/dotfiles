@@ -7,6 +7,23 @@ let
       allowUnfree = true;
       firefox.enableAdobeFlash = true;
       overlays = [
+        /* (final: prev: {
+          grilo-plugins = prev.grilo-plugins // {
+            broken = true;
+            replacement = nixpkgs-stable.grilo-plugins;
+          };
+        }) */
+        (
+          final: prev: {
+            gom = prev.gom.overrideAttrs (oldAttrs: let version = "0.5.1"; in {
+              inherit version;
+              src = builtins.fetchurl {
+                url = "mirror://gnome/sources/${oldAttrs.pname}/${nixpkgs.lib.versions.majorMinor version}/${oldAttrs.pname}-${version}.tar.xz";
+                sha256 = "sha256-15dc4d1302f8210cf08ccba9b2696417fd946d9911bbaf5183cbe36d25d570e0";
+              };
+            });
+          }
+        )
         # GNOME 46: triple-buffering-v4-46
         (final: prev: {
           gnome = prev.gnome.overrideScope (gnomeFinal: gnomePrev: {
