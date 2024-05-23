@@ -10,7 +10,7 @@
         inherit version;
         src = builtins.fetchurl {
           url = "https://gitlab.freedesktop.org/wayland/wayland/-/releases/${version}/downloads/${oldAttrs.pname}-${version}.tar.xz";
-          sha256 = "sha256-PYVFNW2DMw2z/PStvTChOL67wokEoAaJg7ZO9AGCqU8=";
+          sha256 = "sha256-siqTGEz0oetTBFPVYLxoaqa2lUWrafuoatpEeUEDOAgikw==";
         };
       });
       # Update gom to 0.5.1
