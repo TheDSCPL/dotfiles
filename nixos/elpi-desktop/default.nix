@@ -15,7 +15,7 @@ in nixpkgs.lib.nixosSystem {
         };
       };
     })
-    ./overlays.nix
+    ./nixpkgs-config.nix
     ./module.nix
   ];
   specialArgs = {
