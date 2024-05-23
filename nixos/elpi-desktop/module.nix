@@ -73,11 +73,11 @@ in
       vim
       wget
       curl
-      firefox-devedition
+      firefox-devedition-bin
       chromium
       gnome.adwaita-icon-theme
       cryptsetup
-      (builtins.trace wayland.version wayland)
+      wayland
     ];
 
     # Optional Services (Uncomment and configure as needed)
