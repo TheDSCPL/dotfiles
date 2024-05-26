@@ -75,7 +75,6 @@ in
       curl
       firefox-devedition-bin
       # chromium
-      gnome.adwaita-icon-theme
       cryptsetup
       wayland
     ];

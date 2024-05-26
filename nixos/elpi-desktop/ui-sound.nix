@@ -35,6 +35,7 @@
       # alacritty
       # Network applet
       # networkmanagerapplet
+      gnome.adwaita-icon-theme
     ];
 
     # NVIDIA
