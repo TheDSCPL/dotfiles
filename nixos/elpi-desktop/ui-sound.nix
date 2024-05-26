@@ -17,9 +17,9 @@
       enable = false;
       displayManager.gdm.enable = true;
       displayManager.gdm.wayland = true;
-      displayManager.defaultSession = "gnome";
       desktopManager.gnome.enable = true;
     };
+    services.displayManager.defaultSession = "gnome";
 
     services.dbus.enable = true;
     services.dbus.packages = with pkgs; [dconf];
