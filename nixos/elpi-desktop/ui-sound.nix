@@ -68,7 +68,7 @@
     };
 
     environment = {
-      noXlibs = false;
+      noXlibs = true;
       variables = {
         # VA-API NVIDIA
         LIBVA_DRIVER_NAME = "nvidia";
