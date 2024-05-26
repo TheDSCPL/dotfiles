@@ -37,6 +37,12 @@
         x11Support = false;
       };
     })
+    #libepoxy
+    (final: prev: {
+      libepoxy = prev.libepoxy.override (old: {
+        mesonFlags = builtins.map (flag: if (flag == "-Degl=no") then builtins.abort "-Degl=yes" else flag) (old.mesonFlags or []);
+      });
+    })
     /* (final: prev: {
       cairo = prev.cairo.override {
         x11Support = false;
