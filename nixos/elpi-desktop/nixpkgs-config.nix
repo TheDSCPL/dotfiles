@@ -26,21 +26,9 @@
       }); */
     })
     (final: prev: {
-      networkmanager-vpnc = final.stdenv.mkDerivation {
-        pname = "NetworkManager-vpnc-noop";
-        src = null;
+      networkmanager-vpnc = prev.networkmanager-vpnc.overrideAttrs (oldAttrs: {
         buildCommand = "echo 'Disabled this package due to compillation error (nm_version.h not found on package version 1.2.8)' > $out";
-        passthru = {
-          updateScript = {
-            name = "gnome-update-script";
-            command = [ "true" ];
-            supportedFeatures = [
-              "commit"
-            ];
-          };
-          networkManagerPlugin = "VPN/nm-vpnc-service.name";
-        };
-      };
+      });
     })
     (final: prev: {
       dunst = prev.dunst.override {
