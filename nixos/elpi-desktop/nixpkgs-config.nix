@@ -37,6 +37,7 @@
         preConfigure = ''
           ${oldAttrs.preConfigure or ""}
           export CAIRO_BACKEND_CFLAGS=""
+          exit 1
           export CAIRO_BACKEND_LIBS="cairo-gobject cairo-svg cairo-pdf"
         '';
       });
