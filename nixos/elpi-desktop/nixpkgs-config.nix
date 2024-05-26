@@ -29,7 +29,7 @@
       cairo = prev.cairo.override {
         x11Support = false;
         xcbSupport = false;
-      }
+      };
     })
     /* # GNOME 46: triple-buffering-v4-46
     (final: prev: {
