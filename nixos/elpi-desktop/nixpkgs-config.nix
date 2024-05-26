@@ -1,9 +1,9 @@
 {nixpkgs, pkgs, ...}: {
   nixpkgs.config = {
     allowUnfree = true;
-    firefox.enableAdobeFlash = true;
+    # firefox.enableAdobeFlash = true;
   };
-  nixpkgs.overlays = [
+  /* nixpkgs.overlays = [
     (final: prev: {
       # Update wayland to 1.22.93
       wayland = prev.wayland.overrideAttrs (oldAttrs: let version = "1.22.93"; in {
@@ -37,5 +37,5 @@
         });
       });
     })
-  ];
+  ]; */
 }
