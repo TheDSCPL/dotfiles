@@ -26,6 +26,23 @@
       }); */
     })
     (final: prev: {
+      NetworkManager-vpnc = final.stdenv.mkDerivation {
+        name = "noop-NetworkManager-vpnc";
+        src = null;
+        buildCommand = "echo 'Disabled this package due to compillation error (nm_version.h not found on package version 1.2.8)' > $out";
+        passthru = {
+          updateScript = {
+            name = "gnome-update-script";
+            command = [ "true" ];
+            supportedFeatures = [
+              "commit"
+            ];
+          };
+          networkManagerPlugin = "VPN/nm-vpnc-service.name";
+        };
+      };
+    })
+    (final: prev: {
       dunst = prev.dunst.override {
         withX11 = false;
         withWayland = true;
