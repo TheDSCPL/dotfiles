@@ -36,6 +36,7 @@
       gtk2 = prev.gtk2.overrideAttrs (oldAttrs: {
         preConfigure = ''
           ${oldAttrs.preConfigure or ""}
+          export CAIRO_BACKEND_CFLAGS=""
           export CAIRO_BACKEND_LIBS="cairo-gobject cairo-svg cairo-pdf"
         '';
       });
