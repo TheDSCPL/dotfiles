@@ -39,8 +39,8 @@
     })
     #libepoxy
     (final: prev: {
-      libepoxy = prev.libepoxy.override (old: {
-        mesonFlags = builtins.map (flag: if (flag == "-Degl=no") then builtins.abort "-Degl=yes" else flag) (old.mesonFlags or []);
+      libepoxy = prev.libepoxy.overrideAttrs (oldAttrs: {
+        mesonFlags = builtins.map (flag: if (flag == "-Degl=no") then "-Degl=yes" else flag) (oldAttrs.mesonFlags or []);
       });
     })
     /* (final: prev: {
