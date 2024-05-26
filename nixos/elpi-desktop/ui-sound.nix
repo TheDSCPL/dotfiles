@@ -67,6 +67,10 @@
       # pulseaudio.support32Bit = true;
     };
 
+    fonts.fonts = with pkgs; [
+      dejavu_fonts
+    ];
+
     environment = {
       noXlibs = true;
       variables = {
