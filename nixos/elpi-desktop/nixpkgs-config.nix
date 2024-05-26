@@ -25,6 +25,12 @@
         };
       }); */
     })
+    (final: prev: {
+      dunst = prev.dunst.override {
+        withX11 = false;
+        withWayland = true;
+      };
+    })
     /* (final: prev: {
       cairo = prev.cairo.override {
         x11Support = false;
