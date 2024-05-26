@@ -31,10 +31,7 @@ in
     # ./hardened.nix
   ];
   config =
-  let
-    keyboardLayout = "pt";
-    originalPlugins = config._module.args.config.networking.networkmanager.plugins or [];
-  in {
+  let keyboardLayout = "pt"; in {
     # Linux Kernel
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -46,11 +43,6 @@ in
 
     # Networking (Assuming NetworkManager)
     networking.networkmanager.enable = true;
-    networking.networkmanager.plugins = lib.mkAfter (final:
-      if lib.lists.any (p: p.pname == "NetworkManager-vpnc") final.networking.networkmanager.plugins
-      then builtins.filter (p: p.pname != "NetworkManager-vpnc") final.networking.networkmanager.plugins
-      else final.networking.networkmanager.plugins
-    );
     networking.useDHCP = lib.mkDefault true;
     networking.hostName = hostConsts.hostname;
 
