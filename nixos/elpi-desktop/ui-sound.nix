@@ -14,11 +14,12 @@
 
     programs.xwayland.enable = true;
     services.xserver = {
-      enable = true;
+      enable = false;
       displayManager.gdm.enable = true;
       displayManager.gdm.wayland = true;
       displayManager.defaultSession = "gnome";
       desktopManager.gnome.enable = true;
+      desktopManager.default = "gnome";
     };
 
     services.dbus.enable = true;
@@ -68,7 +69,7 @@
     };
 
     environment = {
-      noXlibs = false;
+      noXlibs = true;
       variables = {
         # VA-API NVIDIA
         LIBVA_DRIVER_NAME = "nvidia";
