@@ -42,7 +42,7 @@ in
 
     # Networking (Assuming NetworkManager)
     networking.networkmanager.enable = true;
-    networking.networkmanager.plugins = builtins.filter (p: p.pname != "NetworkManager-vpnc") (config.networking.networkmanager.plugins or []);
+    networking.networkmanager.plugins = if lib.lists.any (p: p.pname == "NetworkManager-vpnc") (config.networking.networkmanager.plugins or []) then builtins.filter (p: p.pname != "NetworkManager-vpnc") (config.networking.networkmanager.plugins or []) else (config.networking.networkmanager.plugins or []);
     networking.useDHCP = lib.mkDefault true;
     networking.hostName = hostConsts.hostname;
 
