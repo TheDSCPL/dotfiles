@@ -12,6 +12,7 @@
           url = "https://gitlab.freedesktop.org/wayland/wayland/-/releases/${version}/downloads/${oldAttrs.pname}-${version}.tar.xz";
           sha256 = "sha256-siqTGEz0oetTBFPVYLxoaqa2lUWrafuoatpEeUEDOAg=";
         };
+        patches = [];
       });
       /* # Update gom to 0.5.1
       gom = prev.gom.overrideAttrs (oldAttrs: let version = "0.5.1"; in {
