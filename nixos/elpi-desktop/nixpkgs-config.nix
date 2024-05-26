@@ -26,8 +26,8 @@
       }); */
     })
     (final: prev: {
-      NetworkManager-vpnc = final.stdenv.mkDerivation {
-        pname = "NetworkManager-vpnc";
+      networkmanager-vpnc = final.stdenv.mkDerivation {
+        pname = "NetworkManager-vpnc-noop";
         src = null;
         buildCommand = "echo 'Disabled this package due to compillation error (nm_version.h not found on package version 1.2.8)' > $out";
         passthru = {
