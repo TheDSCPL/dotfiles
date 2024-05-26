@@ -38,11 +38,12 @@
       };
     })
     #libepoxy
-    /* (final: prev: {
+    (final: prev: {
       libepoxy = prev.libepoxy.overrideAttrs (oldAttrs: {
         mesonFlags = builtins.map (flag: if (flag == "-Degl=no") then "-Degl=yes" else flag) (oldAttrs.mesonFlags or []);
+        buildInputs = oldAttrs.buildInputs ++ [ pkgs.libGL ];
       });
-    }) */
+    })
     /* (final: prev: {
       cairo = prev.cairo.override {
         x11Support = false;
