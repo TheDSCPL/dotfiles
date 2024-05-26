@@ -24,7 +24,7 @@
           sha256 = "sha256-FdxNEwL4IQzwjMupsmlkF/2UbZkRu69Rg8vjbSXVcOA=";
         };
       }); */
-    })
+    }) # -Dmedia-gstreamer=disabled
     (final: prev: {
       networkmanager-vpnc = prev.networkmanager-vpnc.overrideAttrs (oldAttrs: {
         buildCommand = "echo 'Disabled this package due to compillation error (nm_version.h not found on package version 1.2.8)' > $out";
@@ -43,7 +43,9 @@
       };
     })
     (final: prev: {
-      gtk4 = prev.gtk4.override {
+      gtk4 = (prev.gtk4.overrideAttrs (oldAttrs: {
+        mesonFlags = oldAttrs.mesonFlags or [] ++ [ "-Dmedia-gstreamer=disabled" ];
+      })).override {
         waylandSupport = true;
         x11Support = false;
       };
