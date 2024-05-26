@@ -47,6 +47,7 @@
         powerManagement.enable = true;
         modesetting.enable = true;
         nvidiaPersistenced = true;
+        nvidiaSettings = false;
       };
       opengl = {
         enable = true;
