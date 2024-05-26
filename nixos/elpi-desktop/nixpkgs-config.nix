@@ -34,7 +34,7 @@
     })
     (final: prev: {
       gtk2 = prev.gtk2.overrideAttrs (oldAttrs: {
-        configureScript = ''env CAIRO_BACKEND_CFLAGS="" CAIRO_BACKEND_LIBS="cairo-gobject cairo-svg cairo-pdf" ./configure'';
+        configureScript = ''env CAIRO_BACKEND_CFLAGS="" CAIRO_BACKEND_LIBS="" ./configure'';
       });
     })
     /* # GNOME 46: triple-buffering-v4-46
