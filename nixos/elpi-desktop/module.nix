@@ -30,7 +30,11 @@ in
     ./ui-sound.nix
     # ./hardened.nix
   ];
-  config = let keyboardLayout = "pt"; in {
+  config =
+  let
+    keyboardLayout = "pt";
+    originalPlugins = config._module.args.config.networking.networkmanager.plugins or [];
+  in {
     # Linux Kernel
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -42,7 +46,10 @@ in
 
     # Networking (Assuming NetworkManager)
     networking.networkmanager.enable = true;
-    networking.networkmanager.plugins = if lib.lists.any (p: p.pname == "NetworkManager-vpnc") (config.networking.networkmanager.plugins or []) then builtins.filter (p: p.pname != "NetworkManager-vpnc") (config.networking.networkmanager.plugins or []) else (config.networking.networkmanager.plugins or []);
+    networking.networkmanager.plugins =
+      if lib.lists.any (p: p.pname == "NetworkManager-vpnc") originalPlugins
+      then builtins.filter (p: p.pname != "NetworkManager-vpnc") originalPlugins
+      else originalPlugins;
     networking.useDHCP = lib.mkDefault true;
     networking.hostName = hostConsts.hostname;
 
