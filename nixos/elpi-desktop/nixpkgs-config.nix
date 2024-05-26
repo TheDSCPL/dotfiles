@@ -25,18 +25,13 @@
         };
       }); */
     })
-    (final: prev: {
+    /* (final: prev: {
       cairo = prev.cairo.override {
         x11Support = false;
         xcbSupport = false;
         gobjectSupport = true;
       };
-    })
-    (final: prev: {
-      gtk2 = prev.gtk2.overrideAttrs (oldAttrs: {
-        configureScript = ''env CAIRO_BACKEND_CFLAGS="" CAIRO_BACKEND_LIBS="" ./configure'';
-      });
-    })
+    }) */
     /* # GNOME 46: triple-buffering-v4-46
     (final: prev: {
       gnome = prev.gnome.overrideScope (gnomeFinal: gnomePrev: {
