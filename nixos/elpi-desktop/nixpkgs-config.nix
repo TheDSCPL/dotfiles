@@ -16,15 +16,17 @@
       })).override {
         withDocumentation = false;
       };
-      /* # Update gom to 0.5.1
+    })
+    (final: prev: {
+      # Update gom to 0.5.1
       gom = prev.gom.overrideAttrs (oldAttrs: let version = "0.5.1"; in {
         inherit version;
         src = builtins.fetchurl {
           url = "mirror://gnome/sources/${oldAttrs.pname}/${nixpkgs.lib.versions.majorMinor version}/${oldAttrs.pname}-${version}.tar.xz";
           sha256 = "sha256-FdxNEwL4IQzwjMupsmlkF/2UbZkRu69Rg8vjbSXVcOA=";
         };
-      }); */
-    }) # -Dmedia-gstreamer=disabled
+      });
+    })
     (final: prev: {
       networkmanager-vpnc = prev.networkmanager-vpnc.overrideAttrs (oldAttrs: {
         buildCommand = "echo 'Disabled this package due to compillation error (nm_version.h not found on package version 1.2.8)' > $out";
