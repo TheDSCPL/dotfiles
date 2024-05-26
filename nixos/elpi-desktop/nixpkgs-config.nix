@@ -34,12 +34,7 @@
     })
     (final: prev: {
       gtk2 = prev.gtk2.overrideAttrs (oldAttrs: {
-        preConfigure = ''
-          ${oldAttrs.preConfigure or ""}
-          export CAIRO_BACKEND_CFLAGS=""
-          exit 1
-          export CAIRO_BACKEND_LIBS="cairo-gobject cairo-svg cairo-pdf"
-        '';
+        configureScript = ''CAIRO_BACKEND_CFLAGS="" CAIRO_BACKEND_LIBS="cairo-gobject cairo-svg cairo-pdf" ./configure'';
       });
     })
     /* # GNOME 46: triple-buffering-v4-46
