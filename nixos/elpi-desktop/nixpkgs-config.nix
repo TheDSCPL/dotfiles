@@ -31,6 +31,12 @@
         withWayland = true;
       };
     })
+    (final: prev: {
+      gtk3 = prev.gtk3.override {
+        waylandSupport = true;
+        x11Support = false;
+      };
+    })
     /* (final: prev: {
       cairo = prev.cairo.override {
         x11Support = false;
