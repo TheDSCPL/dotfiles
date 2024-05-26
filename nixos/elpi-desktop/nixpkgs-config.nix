@@ -42,6 +42,12 @@
         x11Support = false;
       };
     })
+    (final: prev: {
+      gtk4 = prev.gtk4.override {
+        waylandSupport = true;
+        x11Support = false;
+      };
+    })
     #libepoxy
     (final: prev: {
       libepoxy = prev.libepoxy.overrideAttrs (oldAttrs: {
