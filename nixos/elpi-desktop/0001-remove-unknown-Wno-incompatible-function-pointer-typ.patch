@@ -1,0 +1,30 @@
+From c377e83969c9ef482c423554237a659310ee5351 Mon Sep 17 00:00:00 2001
+From: TheDSCPL <kpvrzlzzx@mozmail.com>
+Date: Mon, 27 May 2024 16:49:51 +0000
+Subject: [PATCH] remove unknown -Wno-incompatible-function-pointer-types
+ compiler option
+
+---
+ meson.build | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 063b829..71f2c0c 100644
+--- a/meson.build
++++ b/meson.build
+@@ -53,9 +53,9 @@ add_project_arguments(
+   ), language: 'c')
+ 
+ # HACK: vala doesn't support declaring const arguments, so we get a lot of errors
+-if cc.get_id() == 'clang'
+-  add_project_arguments('-Wno-incompatible-function-pointer-types', language: 'c')
+-endif
++#if cc.get_id() == 'clang'
++#  add_project_arguments('-Wno-incompatible-function-pointer-types', language: 'c')
++#endif
+ 
+ conf.set('PACKAGE_NAME', meson.project_name())
+ conf.set_quoted('VERSION', meson.project_version())
+-- 
+2.39.1
+
