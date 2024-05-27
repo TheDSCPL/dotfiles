@@ -98,7 +98,7 @@
         glib = prev.glib.overrideAttrs (oldAttrs: {
           postPatch = ''
             ${oldAttrs.postPatch or ""}
-            exit 0
+            exit 1
             # Replace all strings with pattern "^static inline" with "static __inline" in all .c and .h files
             find . -type f -name "*.c" -exec sed -i 's/^static inline/static __inline/g' {} +
             find . -type f -name "*.h" -exec sed -i 's/^static inline/static __inline/g' {} +
