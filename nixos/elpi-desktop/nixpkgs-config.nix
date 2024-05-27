@@ -69,14 +69,14 @@
         '';
       });
     })
-    /* (final: prev: {
+    (final: prev: {
       cairo = prev.cairo.override {
         x11Support = false;
         xcbSupport = false;
         gobjectSupport = true;
       };
-    }) */
-    /* # GNOME 46: triple-buffering-v4-46
+    })
+    # GNOME 46: triple-buffering-v4-46
     (final: prev: {
       gnome = prev.gnome.overrideScope (gnomeFinal: gnomePrev: {
         mutter = gnomePrev.mutter.overrideAttrs ( old: {
@@ -89,6 +89,6 @@
           };
         });
       });
-    }) */
+    })
   ];
 }
