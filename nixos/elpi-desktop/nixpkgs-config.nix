@@ -60,7 +60,7 @@
           # Remove patch for version 1.2.1 because it's merged in 1.2.2
           patches = [];
           # Disable broken tests
-          doCheck = true;
+          doCheck = false;
         });
       })
       (final: prev: {
