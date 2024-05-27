@@ -59,6 +59,8 @@
           };
           # Remove patch for version 1.2.1 because it's merged in 1.2.2
           patches = [];
+          # Disable broken tests
+          # doCheck = false;
         });
       })
       (final: prev: {
@@ -128,7 +130,7 @@
             ${oldAttrs.postPatch or ""}
             # Replace all strings with pattern "^static inline" with "static __inline" in all .c and .h files
             find . -type f '(' -name '*.c' -o -name '*.h' ')' -print -exec sed -i 's/^static inline/static __inline/g' {} +
-            # exit 1
+            exit 1
           '';
         });
       })
