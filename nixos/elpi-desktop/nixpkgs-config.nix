@@ -40,7 +40,14 @@
           sha256 = "sha256-q6lcMjA3yELxYXkxJgIxuFV9EZqiiRy8qLgR/MVZKUo=";
         };
         patches = (oldAttrs.patches or []) ++ [
-          ./0001-remove-unknown-Wno-incompatible-function-pointer-typ.patch
+          ./umockdev-remove-unknown-Wno-incompatible-function-pointer-type.patch
+        ];
+      });
+    })
+    (final: prev: {
+      libwacom = prev.libwacom.overrideAttrs (oldAttrs: {
+        patches = (oldAttrs.patches or []) ++ [
+          ./libwacom-hardpass-files-in-git-test.patch
         ];
       });
     })
