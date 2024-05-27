@@ -41,7 +41,7 @@
     (final: prev: {
       gtk3 = prev.gtk3.override {
         waylandSupport = true;
-        x11Support = false;
+        x11Support = true;
       };
     })
     (final: prev: {
