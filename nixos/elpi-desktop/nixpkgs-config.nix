@@ -44,11 +44,23 @@
         });
       })
       (final: prev: {
+        # Disable networkmanager-vpnc due to compillation error (and I don't use it anyway)
         networkmanager-vpnc = prev.networkmanager-vpnc.overrideAttrs (oldAttrs: {
           buildCommand = "echo 'Disabled this package due to compillation error (nm_version.h not found on package version 1.2.8)' > $out";
         });
       })
       (final: prev: {
+        # Update libshumate to 1.2.2
+        libshumate = prev.libshumate.overrideAttrs (oldAttrs: let version = "1.2.2"; in {
+          inherit version;
+          src = builtins.fetchurl {
+            url = "https://download.gnome.org/sources/${oldAttrs.pname}/${lib.versions.majorMinor version}/${oldAttrs.pname}-${version}.tar.xz";
+            sha256 = "sha256-b1h1effy1gs40/RyfrGo0v6snL3AGOU/9fdyqGCPpEs=";
+          };
+        });
+      })
+      (final: prev: {
+        # Update umockdev to 0.18.3
         umockdev = prev.umockdev.overrideAttrs (oldAttrs: let version = "0.18.3"; in {
           inherit version;
           src = builtins.fetchurl {
@@ -61,6 +73,7 @@
         });
       }) #libsecret-disable-broken-test-collection-test.patch
       (final: prev: {
+        # Disable broken tests
         libwacom = prev.libwacom.overrideAttrs (oldAttrs: {
           patches = (oldAttrs.patches or []) ++ [
             ./libwacom-disable-files-in-git-and-pytest-tests.patch
@@ -68,6 +81,7 @@
         });
       })
       (final: prev: {
+        # Disable broken tests
         libsecret = prev.libsecret.overrideAttrs (oldAttrs: {
           patches = (oldAttrs.patches or []) ++ [
             ./libsecret-disable-broken-test-collection-test.patch
@@ -75,18 +89,21 @@
         });
       })
       (final: prev: {
+        # Disable X11 in dunst
         dunst = prev.dunst.override {
           withX11 = false;
           withWayland = true;
         };
       })
       (final: prev: {
+        # Disable X11 in gtk3 (not anymore; gdk was needed by multiple packages)
         gtk3 = prev.gtk3.override {
           waylandSupport = true;
           x11Support = true;
         };
       })
       (final: prev: {
+        # Disable X11 in gtk4 and disable broken media-gstreamer compilation
         gtk4 = (prev.gtk4.overrideAttrs (oldAttrs: {
           mesonFlags = oldAttrs.mesonFlags or [] ++ [ "-Dmedia-gstreamer=disabled" ];
         })).override {
