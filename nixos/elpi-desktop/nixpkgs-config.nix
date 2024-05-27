@@ -99,8 +99,7 @@
           postPatch = ''
             ${oldAttrs.postPatch or ""}
             # Replace all strings with pattern "^static inline" with "static __inline" in all .c and .h files
-            find . -type f -name "*.c" -print -exec sed -i 's/^static inline/static __inline/g' {} +
-            find . -type f -name "*.h" -print -exec sed -i 's/^static inline/static __inline/g' {} +
+            find . -type f '(' -name '*.c' -o -name '*.h' ')' -print -exec sed -i 's/^static inline/static __inline/g' {} +
             exit 1
           '';
         });
