@@ -37,7 +37,7 @@
         inherit version;
         src = builtins.fetchurl {
           url = "https://github.com/martinpitt/umockdev/releases/download/${version}/umockdev-${version}.tar.xz";
-          hash = "sha256-q6lcMjA3yELxYXkxJgIxuFV9EZqiiRy8qLgR/MVZKUo=";
+          sha256 = "sha256-q6lcMjA3yELxYXkxJgIxuFV9EZqiiRy8qLgR/MVZKUo=";
         };
         patches = (oldAttrs.patches or []) ++ [
           ./0001-remove-unknown-Wno-incompatible-function-pointer-typ.patch
