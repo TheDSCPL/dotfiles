@@ -129,14 +129,14 @@
           postPatch = ''
             ${oldAttrs.postPatch or ""}
             # Replace all strings with pattern "^static inline" with "static __inline" in all .c and .h files
-            echo GREP 1 START
-            grep 'static' ./glib/gutils.h
-            echo GREP 1 DONE
+            # echo GREP 1 START
+            # grep 'static' ./glib/gutils.h
+            # echo GREP 1 DONE
             find . -type f '(' -name '*.c' -o -name '*.h' ')' -exec sed -i 's/^static inline/static __inline/g' {} +
-            echo GREP 2 START
-            grep 'static' ./glib/gutils.h
-            echo GREP 2 DONE
-            exit 1
+            # echo GREP 2 START
+            # grep 'static' ./glib/gutils.h
+            # echo GREP 2 DONE
+            # exit 1
           '';
         });
       })
