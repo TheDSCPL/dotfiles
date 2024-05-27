@@ -43,11 +43,18 @@
           ./umockdev-remove-unknown-Wno-incompatible-function-pointer-type.patch
         ];
       });
-    })
+    }) #libsecret-disable-broken-test-collection-test.patch
     (final: prev: {
       libwacom = prev.libwacom.overrideAttrs (oldAttrs: {
         patches = (oldAttrs.patches or []) ++ [
           ./libwacom-disable-files-in-git-and-pytest-tests.patch
+        ];
+      });
+    })
+    (final: prev: {
+      libsecret = prev.libsecret.overrideAttrs (oldAttrs: {
+        patches = (oldAttrs.patches or []) ++ [
+          ./libsecret-disable-broken-test-collection-test.patch
         ];
       });
     })
