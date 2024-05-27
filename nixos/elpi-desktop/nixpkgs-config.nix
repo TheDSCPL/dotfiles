@@ -36,7 +36,7 @@
       umockdev = prev.umockdev.overrideAttrs (oldAttrs: let version = "0.18.3"; in {
         inherit version;
         src = builtins.fetchurl {
-          url = "https://github.com/martinpitt/umockdev/releases/download/${finalAttrs.version}/umockdev-${finalAttrs.version}.tar.xz";
+          url = "https://github.com/martinpitt/umockdev/releases/download/${version}/umockdev-${version}.tar.xz";
           hash = "sha256-q6lcMjA3yELxYXkxJgIxuFV9EZqiiRy8qLgR/MVZKUo=";
         };
         patches = (oldAttrs.patches or []) ++ [
