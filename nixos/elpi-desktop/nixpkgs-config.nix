@@ -96,10 +96,12 @@
       })
       (final: prev: {
         glib = prev.glib.overrideAttrs (oldAttrs: {
+          # Fix known build error
+          # https://stackoverflow.com/a/21835025/6302540
           postPatch = ''
             ${oldAttrs.postPatch or ""}
             # Replace all strings with pattern "^static inline" with "static __inline" in all .c and .h files
-            find . -type f '(' -name '*.c' -o -name '*.h' ')' -print -exec sed -i 's/^static inline/static __inline/g' {} +
+            find . -type f '(' -name '*.c' -o -name '*.h' ')' -print -exec sed 's/^static inline/static __inline/g' {} +
             exit 1
           '';
         });
