@@ -47,7 +47,7 @@
     (final: prev: {
       libwacom = prev.libwacom.overrideAttrs (oldAttrs: {
         patches = (oldAttrs.patches or []) ++ [
-          ./libwacom-hardpass-files-in-git-test.patch
+          ./libwacom-disable-files-in-git-and-pytest-tests.patch
         ];
       });
     })

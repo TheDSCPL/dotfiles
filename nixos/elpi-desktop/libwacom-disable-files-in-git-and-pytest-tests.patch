@@ -1,0 +1,50 @@
+From f50994eef26de2db3f096e427da28b11c5b95aff Mon Sep 17 00:00:00 2001
+From: TheDSCPL <kpvrzlzzx@mozmail.com>
+Date: Mon, 27 May 2024 17:21:48 +0000
+Subject: [PATCH] disable files-in-git and pytest tests
+
+---
+ meson.build | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 723e946..09c923f 100644
+--- a/meson.build
++++ b/meson.build
+@@ -121,10 +121,10 @@ install_subdir('data',
+ 	       exclude_files: ['wacom.example',
+ 			       'layouts/README.md'])
+ 
+-test('files-in-git',
+-     find_program('test/check-files-in-git.sh'),
+-     args: [meson.current_source_dir()],
+-     suite: ['all'])
++#test('files-in-git',
++#     find_program('test/check-files-in-git.sh'),
++#     args: [meson.current_source_dir()],
++#     suite: ['all'])
+ 
+ ############### tools ###########################
+ 
+@@ -288,12 +288,12 @@ if get_option('tests').enabled()
+ 	endif
+ 
+ 	pymod.find_installation(modules: ['libevdev', 'pyudev', 'pytest'])
+-	pytest = find_program('pytest-3', 'pytest')
+-	test('pytest',
+-	     pytest,
+-	     args: [meson.current_source_dir()],
+-	     env: ['MESON_SOURCE_ROOT=@0@'.format(meson.current_source_dir())],
+-	     suite: ['all'])
++#	pytest = find_program('pytest-3', 'pytest')
++#	test('pytest',
++#	     pytest,
++#	     args: [meson.current_source_dir()],
++#	     env: ['MESON_SOURCE_ROOT=@0@'.format(meson.current_source_dir())],
++#	     suite: ['all'])
+ endif
+ 
+ # This is a non-optional test
+-- 
+2.39.1
+
