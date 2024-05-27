@@ -57,6 +57,8 @@
             url = "https://download.gnome.org/sources/${oldAttrs.pname}/${lib.versions.majorMinor version}/${oldAttrs.pname}-${version}.tar.xz";
             sha256 = "sha256-b1h1effy1gs40/RyfrGo0v6snL3AGOU/9fdyqGCPpEs=";
           };
+          # Remove patch for version 1.2.1 because it's merged in 1.2.2
+          patches = [];
         });
       })
       (final: prev: {
