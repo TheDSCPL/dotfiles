@@ -2,8 +2,15 @@
   # Make the nixpkgs channel be the system configuration flake's nixpkgs
   # input (benefit from the overlays, same configs and locked versions)
   nix = {
-    registry.nixpkgs.flake = nixpkgs;
+    registry = {
+      self.flake = inputs.self;
+      nixpkgs.flake = inputs.nixpkgs;
+      n.flake = inputs.nixpkgs;
+    };
+    #registry.nixpkgs.flake = nixpkgs;
     nixPath = [ "nixpkgs=${nixpkgs}" ];
+    package = pkgs.nix;
+    settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
   nixpkgs = {
