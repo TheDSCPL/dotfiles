@@ -71,7 +71,7 @@
     })
     (final: prev: {
       cairo = prev.cairo.override {
-        x11Support = false;
+        x11Support = true;
         xcbSupport = false;
         gobjectSupport = true;
       };
