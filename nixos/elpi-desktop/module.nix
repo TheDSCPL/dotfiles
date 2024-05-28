@@ -35,9 +35,6 @@ in
     # Linux Kernel
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    # Start systemd in initrd
-    boot.initrd.systemd.enable = true;
-
     # Nix configurations
     system.stateVersion = "24.11";
     hardware.enableRedistributableFirmware = true;
@@ -58,6 +55,8 @@ in
     # /etc is mounted via an overlayfs instead of created by a custom perl script
     # EXPERIMENTAL: I tried and it breaks the build, so it's disabled for now
     #system.etc.overlay.enable = true;
+    # Start systemd in initrd (required for the overlayfs above)
+    # boot.initrd.systemd.enable = true;
 
     # Console Configuration 
     console.font = "Lat2-Terminus16";
