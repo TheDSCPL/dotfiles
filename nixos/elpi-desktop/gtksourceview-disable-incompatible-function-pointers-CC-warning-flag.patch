@@ -1,0 +1,29 @@
+From 6106af177b60ebf2585f9823bdbc391f3563cf7d Mon Sep 17 00:00:00 2001
+From: TheDSCPL <kpvrzlzzx@mozmail.com>
+Date: Tue, 28 May 2024 13:22:52 +0000
+Subject: [PATCH] disable incompatible function pointers CC warning flag
+
+---
+ meson.build | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index c44a77eb..e4875520 100644
+--- a/meson.build
++++ b/meson.build
+@@ -271,9 +271,9 @@ else
+ 
+   # Ignore some Werror for clang until GLib fixes volatile usage in
+   # GType registration.
+-  if meson.get_compiler('c').get_id() == 'clang'
+-    test_c_args += ['-Wno-incompatible-pointer-types-discards-qualifiers']
+-  endif
++  #if meson.get_compiler('c').get_id() == 'clang'
++  #  test_c_args += ['-Wno-incompatible-pointer-types-discards-qualifiers']
++  #endif
+ 
+   if buildtype != 'plain'
+     test_c_args += '-fstack-protector-strong'
+-- 
+2.39.1
+

@@ -93,6 +93,14 @@
         });
       })
       (final: prev: {
+        # Disable unknown CC flag
+        gtksourceview = prev.gtksourceview.overrideAttrs (oldAttrs: {
+          patches = (oldAttrs.patches or []) ++ [
+            ./gtksourceview-disable-incompatible-function-pointers-CC-warning-flag.patch
+          ];
+        });
+      })
+      (final: prev: {
         # Disable X11 in dunst
         dunst = prev.dunst.override {
           withX11 = false;
@@ -131,6 +139,10 @@
             # Replace all strings with pattern "^static inline" with "static __inline" in all .c and .h files
             find . -type f '(' -name '*.c' -o -name '*.h' ')' -exec sed -i 's/^static inline/static __inline/g' {} +
           '';
+          # =""
+          # Adding -DGLIB_DEPRECATED="" to mesonFlags
+          # gnome-calculator
+          mesonFlags = (oldAttrs.mesonFlags or []) ++ [ ''-DGLIB_DEPRECATED=""'' ];
         });
       })
       (final: prev: {
