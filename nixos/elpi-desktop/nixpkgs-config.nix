@@ -140,10 +140,9 @@
             find . -type f '(' -name '*.c' -o -name '*.h' ')' -exec sed -i 's/^static inline/static __inline/g' {} +
           '';
           # =""
-          # Adding -DGLIB_DEPRECATED= to CC flags
-          # gnome-calculator
+          # Adding -DGLIB_DISABLE_DEPRECATION_WARNINGS= to CC flags
           env.NIX_CFLAGS_COMPILE = toString (lib.lists.optional (oldAttrs.env ? NIX_CFLAGS_COMPILE) oldAttrs.env.NIX_CFLAGS_COMPILE ++ [
-            "-DGLIB_DEPRECATED="
+            "-DGLIB_DISABLE_DEPRECATION_WARNINGS="
           ]);
         });
       })
