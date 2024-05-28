@@ -142,7 +142,7 @@
           # =""
           # Adding -DGLIB_DEPRECATED= to CC flags
           # gnome-calculator
-          env.NIX_CFLAGS_COMPILE = toString ((oldAttrs.env.NIX_CFLAGS_COMPILE or []) ++ [
+          env.NIX_CFLAGS_COMPILE = toString (lib.lists.optional (oldAttrs.env ? NIX_CFLAGS_COMPILE) oldAttrs.env.NIX_CFLAGS_COMPILE ++ [
             "-DGLIB_DEPRECATED="
           ]);
         });
