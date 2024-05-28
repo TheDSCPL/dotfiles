@@ -142,7 +142,9 @@
           # =""
           # Adding -DGLIB_DEPRECATED="" to mesonFlags
           # gnome-calculator
-          mesonFlags = (oldAttrs.mesonFlags or []) ++ [ ''-DGLIB_DEPRECATED=""'' ];
+          env.NIX_CFLAGS_COMPILE = toString ((oldAttrs.env.NIX_CFLAGS_COMPILE or []) ++ [
+            "-DGLIB_DEPRECATED="
+          ]);
         });
       })
       (final: prev: {
