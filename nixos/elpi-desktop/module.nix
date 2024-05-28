@@ -52,6 +52,9 @@ in
     # Keyboard Configuration
     services.xserver.xkb.layout = keyboardLayout;
 
+    # /etc is mounted via an overlayfs instead of created by a custom perl script
+    system.etc.overlay.enable = true;
+
     # Console Configuration 
     console.font = "Lat2-Terminus16";
     console.useXkbConfig = true;
@@ -83,6 +86,8 @@ in
     # Optional Services (Uncomment and configure as needed)
     services.openssh = {
       enable = true;
+      # Adds ~/.ssh/authorizedKeys to authorizedKeysFiles
+      authorizedKeysInHomedir = true;
       settings = {
         PermitRootLogin = "yes";
         PasswordAuthentication = true;

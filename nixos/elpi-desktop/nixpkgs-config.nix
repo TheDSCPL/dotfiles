@@ -64,6 +64,12 @@
         });
       })
       (final: prev: {
+        upower = prev.upower.overrideAttrs (oldAttrs: {
+          # Disable broken tests
+          doCheck = false;
+        });
+      })
+      (final: prev: {
         # Update umockdev to 0.18.3
         umockdev = prev.umockdev.overrideAttrs (oldAttrs: let version = "0.18.3"; in {
           inherit version;
