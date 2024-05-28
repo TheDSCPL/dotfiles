@@ -56,7 +56,8 @@ in
     services.xserver.xkb.layout = keyboardLayout;
 
     # /etc is mounted via an overlayfs instead of created by a custom perl script
-    system.etc.overlay.enable = true;
+    # EXPERIMENTAL: I tried and it breaks the build, so it's disabled for now
+    #system.etc.overlay.enable = true;
 
     # Console Configuration 
     console.font = "Lat2-Terminus16";
