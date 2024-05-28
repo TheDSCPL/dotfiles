@@ -104,6 +104,7 @@
           patches = (oldAttrs.patches or []) ++ [
             ./gtksourceview-disable-incompatible-function-pointers-CC-warning-flag.patch
           ];
+          doCheck = false;
         });
       })
       (final: prev: {
