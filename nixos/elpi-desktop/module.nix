@@ -36,7 +36,7 @@ in
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # Nix configurations
-    system.stateVersion = "24.11";
+    system.stateVersion = "23.11";
     hardware.enableRedistributableFirmware = true;
     nix.package = pkgs.nixFlakes;
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
