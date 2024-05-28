@@ -35,8 +35,11 @@ in
     # Linux Kernel
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
+    # Start systemd in initrd
+    boot.initrd.systemd.enable = true;
+
     # Nix configurations
-    system.stateVersion = "23.11";
+    system.stateVersion = "24.11";
     hardware.enableRedistributableFirmware = true;
     nix.package = pkgs.nixFlakes;
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
