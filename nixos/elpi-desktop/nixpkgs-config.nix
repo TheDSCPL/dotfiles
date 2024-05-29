@@ -115,6 +115,15 @@
         };
       })
       (final: prev: {
+        # Disable optional package dependencies in qt5.qtbase
+        qt5 = prev.qt5.overrideScope' (qt5final: qt5prev: {
+          qtbase = qt5prev.qtbase.override {
+            postgres = null;
+            mysqlSupport = false;
+          };
+        });
+      })
+      (final: prev: {
         # Disable X11 in gtk3 (not anymore; gdk was needed by multiple packages)
         gtk3 = prev.gtk3.override {
           waylandSupport = true;
