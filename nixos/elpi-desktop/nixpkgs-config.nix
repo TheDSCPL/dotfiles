@@ -116,7 +116,7 @@
       })
       (final: prev: {
         # Disable optional package dependencies in qt5.qtbase
-        qt5 = prev.qt5.overrideScope' (qt5final: qt5prev: {
+        qt5 = prev.qt5.overrideScope (qt5final: qt5prev: {
           qtbase = qt5prev.qtbase.override {
             postgres = null;
             mysqlSupport = false;
