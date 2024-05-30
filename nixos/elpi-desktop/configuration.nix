@@ -3,7 +3,7 @@ let
   hostConsts = config.hostConsts;
 #  system = nixpkgs.hostPlatform;
 
-  config =
+  cfg =
   # General configurations
   {
     # Timezone
@@ -189,6 +189,6 @@ in
       };
     };
   };
-  inherit config;
+  config = cfg;
 }
 
