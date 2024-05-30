@@ -63,8 +63,6 @@ let
   }
   # T GUI
   {
-    # TODO: add the rest of the GUI config
-
     # Enable X11 (gave up from Wayland after 3 weeks of trying to make it work with NVIDIA)
     services.xserver.enable = true;
     # Enable the GNOME Desktop Environment.
@@ -76,6 +74,41 @@ let
     # From 24.05
     #services.libinput.enable = true;
     #services.displayManager.defaultSession = "gnome";
+
+    fonts.fontDir.enable = true;
+    fonts.packages = with pkgs; [
+      dejavu_fonts
+    ];
+
+    environment = {
+      variables = {
+        # VA-API NVIDIA
+        LIBVA_DRIVER_NAME = "nvidia";
+        PROTON_ENABLE_NVAPI="1";
+        DXVK_ENABLE_NVAPI="1";
+        NVD_BACKEND = "direct";
+        GBM_BACKEND = "nvidia-drm";
+        __GL_GSYNC_ALLOWED = "0";
+        __GL_VRR_ALLOWED = "0";
+        DIRENV_LOG_FORMAT = "";
+        __NV_PRIME_RENDER_OFFLOAD = "1";
+        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        __VK_LAYER_NV_optimus = "NVIDIA_only";
+      } /* // {
+        # https://gist.github.com/sioodmy/1932583dd8a804e0b3fe86416b923a16#tweak-your-configurationnix
+        # Wayland configs
+        NIXOS_OZONE_WL = "1";
+        QT_QPA_PLATFORM = "wayland";
+        QT_QPA_PLATFORMTHEME = "qt5ct";
+        MOZ_ENABLE_WAYLAND = "1";
+        XDG_SESSION_TYPE = "wayland";
+        CLUTTER_BACKEND = "wayland";
+        WLR_BACKENDS = "drm";
+        WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
+        # WLR_DRM_NO_ATOMIC = "1";
+        # WLR_NO_HARDWARE_CURSORS = "1";
+      } */;
+    };
   }
   # Sound
   {
