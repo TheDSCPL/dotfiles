@@ -98,6 +98,7 @@ let
   {
     # Enable the NetworkManager service to configure network connections.
     networking.networkmanager.enable = true;
+    networking.networkmanager.wifi.backend = "iwd";
     # Enable wireless support via wpa_supplicant.
     #networking.wireless.enable = true;
     networking.hostName = hostConsts.hostname;
