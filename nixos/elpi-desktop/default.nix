@@ -19,6 +19,6 @@ in nixpkgs.lib.nixosSystem {
     ./module.nix
   ];
   specialArgs = {
-    inherit args;
+    inherit args system;
   };
 }
