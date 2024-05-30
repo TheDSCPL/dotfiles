@@ -3,9 +3,11 @@ let
   hostConsts = config.hostConsts;
 #  system = nixpkgs.hostPlatform;
 
+  merge = lib.attrsets.recursiveUpdate;
+
   cfg =
   # General configurations
-  {
+  merge {
     # Timezone
     time.timeZone = hostConsts.timezone;
     i18n.defaultLocale = hostConsts.locale;
@@ -20,7 +22,7 @@ let
     programs.zsh.enable = true;
     environment.shells = [ pkgs.zsh ];
     users.defaultUserShell = pkgs.zsh;
-  } //
+  } (merge
   # System packages
   {
     # Install NeoVim and use it globally as default editor
@@ -45,7 +47,7 @@ let
       zip
       tree
     ];
-  } //
+  } (merge
   # T GUI
   {
     # TODO: add the rest of the GUI config
@@ -60,7 +62,7 @@ let
     services.xserver.displayManager.defaultSession = "gnome";
     # From 24.05
     #services.displayManager.defaultSession = "gnome";
-  } //
+  } (merge
   # Sound
   {
     sound.enable = true;
@@ -72,7 +74,7 @@ let
       pulse.enable = true;
       jack.enable = true;
     };
-  } //
+  } (merge
   # Services
   {
     # Enable CUPS to print documents.
@@ -93,7 +95,7 @@ let
       };
       udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
     };
-  } //
+  } (merge
   # Networking
   {
     # Enable the NetworkManager service to configure network connections.
@@ -118,7 +120,7 @@ let
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-  } //
+  } (merge
   # T Nix
   {
     # TODO: set nixpkgs channel to this flake's configured nixpkgs input
@@ -145,7 +147,7 @@ let
     #
     # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
     system.stateVersion = "23.11"; # Did you read the comment?
-  } //
+  }
   # T Users
   {
     # TODO: add HomeManager
@@ -156,7 +158,7 @@ let
       initialPassword = "password";
       shell = pkgs.zsh;
     };
-  };
+  }))))));
 in
 {
   options = {
