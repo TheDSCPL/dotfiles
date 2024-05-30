@@ -98,15 +98,15 @@ let
   {
     # Enable the NetworkManager service to configure network connections.
     networking.networkmanager.enable = true;
-    networking.networkmanager.wifi.backend = "iwd";
+    #networking.networkmanager.wifi.backend = "iwd";
     # Enable wireless support via wpa_supplicant.
-    #networking.wireless.enable = true;
+    networking.wireless.enable = true;
     networking.hostName = hostConsts.hostname;
     # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
     # (the default) this is the recommended approach. When using systemd-networkd it's
     # still possible to use this option, but it's recommended to use it in conjunction
     # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-    networking.useDHCP = true;
+    # networking.useDHCP = true;
     # networking.interfaces.enp6s0.useDHCP = lib.mkDefault true;
     # networking.interfaces.wlp5s0.useDHCP = lib.mkDefault true;
 
