@@ -19,7 +19,9 @@
       displayManager.gdm.wayland = true;
       desktopManager.gnome.enable = true;
     };
-    services.displayManager.defaultSession = "gnome";
+    services.xserver.displayManager.defaultSession = "gnome";
+    # From 24.05
+    #services.displayManager.defaultSession = "gnome";
 
     services.dbus.enable = true;
     services.dbus.packages = with pkgs; [dconf];
