@@ -89,8 +89,8 @@ in
     # Optional Services (Uncomment and configure as needed)
     services.openssh = {
       enable = true;
-      # Adds ~/.ssh/authorizedKeys to authorizedKeysFiles
-      authorizedKeysInHomedir = true;
+      # Adds ~/.ssh/authorizedKeys to authorizedKeysFiles (from 24.05)
+      # authorizedKeysInHomedir = true;
       settings = {
         PermitRootLogin = "yes";
         PasswordAuthentication = true;
