@@ -1,8 +1,9 @@
 {nixpkgs, pkgs, lib, args, system, ...}:
 let
-  nixpkgs-stable = args.nixpkgs-stable;
-  stable = import nixpkgs-stable { inherit system; /* config = { allowUnfree = true; }; */ };
-in {
+  # nixpkgs-unstable = args.nixpkgs-unstable;
+  # unstable = import nixpkgs-unstable { inherit system; /* config = { allowUnfree = true; }; */ };
+in
+ {
   # Make the nixpkgs channel be the system configuration flake's nixpkgs
   # input (benefit from the overlays, same configs and locked versions)
   /* nix = {
@@ -151,21 +152,20 @@ in {
         });
       })
       (final: prev: {
-        inherit (stable) glib;
-        # glib = prev.glib.overrideAttrs (oldAttrs: {
-        #   # Fix known build error
-        #   # https://stackoverflow.com/a/21835025/6302540
-        #   /* postPatch = ''
-        #     ${oldAttrs.postPatch or ""}
-        #     # Replace all strings with pattern "^static inline" with "static __inline" in all .c and .h files
-        #     find . -type f '(' -name '*.c' -o -name '*.h' ')' -exec sed -i 's/^static inline/static __inline/g' {} +
-        #   ''; */
-        #   # =""
-        #   # Adding -DGLIB_DISABLE_DEPRECATION_WARNINGS= to CC flags
-        #   env.NIX_CFLAGS_COMPILE = toString (lib.lists.optional (oldAttrs.env ? NIX_CFLAGS_COMPILE) oldAttrs.env.NIX_CFLAGS_COMPILE ++ [
-        #     "-DGLIB_DISABLE_DEPRECATION_WARNINGS="
-        #   ]);
-        # });
+        glib = prev.glib.overrideAttrs (oldAttrs: {
+          # Fix known build error
+          # https://stackoverflow.com/a/21835025/6302540
+          /* postPatch = ''
+            ${oldAttrs.postPatch or ""}
+            # Replace all strings with pattern "^static inline" with "static __inline" in all .c and .h files
+            find . -type f '(' -name '*.c' -o -name '*.h' ')' -exec sed -i 's/^static inline/static __inline/g' {} +
+          ''; */
+          # =""
+          # Adding -DGLIB_DISABLE_DEPRECATION_WARNINGS= to CC flags
+          env.NIX_CFLAGS_COMPILE = toString (lib.lists.optional (oldAttrs.env ? NIX_CFLAGS_COMPILE) oldAttrs.env.NIX_CFLAGS_COMPILE ++ [
+            "-DGLIB_DISABLE_DEPRECATION_WARNINGS="
+          ]);
+        });
       })
       (final: prev: {
         cairo = prev.cairo.override {
