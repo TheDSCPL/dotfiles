@@ -84,7 +84,7 @@ let
     services.xserver.videoDrivers = [ "nvidia" ];
     hardware = {
       nvidia = {
-        # open = true;
+        open = true;
         powerManagement.enable = true;
         modesetting.enable = true;
         nvidiaPersistenced = true;
