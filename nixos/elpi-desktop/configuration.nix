@@ -58,9 +58,10 @@ let
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.desktopManager.gnome.enable = true;
     # Enable libinput for mouse events
-    services.libinput.enable = true;
+    services.xserver.libinput.enable = true;
     services.xserver.displayManager.defaultSession = "gnome";
     # From 24.05
+    #services.libinput.enable = true;
     #services.displayManager.defaultSession = "gnome";
   } (merge
   # Sound
