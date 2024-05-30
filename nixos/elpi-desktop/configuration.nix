@@ -80,6 +80,37 @@ let
       dejavu_fonts
     ];
 
+    # NVIDIA
+    services.xserver.videoDrivers = [ "nvidia" ];
+    hardware = {
+      nvidia = {
+        open = true;
+        powerManagement.enable = true;
+        modesetting.enable = true;
+        nvidiaPersistenced = true;
+        # nvidiaSettings = false;
+      };
+      # This option will expose GPUs on containers with the --device CLI option (available from 24.05)
+      # nvidia-container-toolkit.enable = true;
+      opengl = {
+        enable = true;
+        driSupport = true;
+        driSupport32Bit = true;
+        extraPackages = with pkgs; [
+          libva
+          nvidia-vaapi-driver # LIBVA_DRIVER_NAME = "nvidia"
+          #intel-media-driver  # LIBVA_DRIVER_NAME = "iHD"
+          # vaapiVdpau
+          # libvdpau-va-gl
+          # Vulkan
+          vulkan-tools
+          # DirectX 9, 10 and 11
+          dxvk
+        ];
+      };
+      # pulseaudio.support32Bit = true;
+    };
+
     environment = {
       variables = {
         # VA-API NVIDIA
