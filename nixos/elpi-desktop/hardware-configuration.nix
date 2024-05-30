@@ -2,47 +2,73 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, modulesPath, ... }:
-
 {
   imports =
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
+  # Linux Kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Boot
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" "usb_storage" "dm_mod" "dm_crypt" "btrfs" "dm_mod" "dm_snapshot" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub = {
+    enable = true;
+    device = "nodev"; # for UEFI, use "nodev"; otherwise, specify the device like "/dev/sda"
+    efiSupport = true;
+    useOSProber = true;
+  };
+  # /etc is mounted via an overlayfs instead of created by a custom perl script
+  # EXPERIMENTAL: I tried and it breaks the build, so it's disabled for now
+  #system.etc.overlay.enable = true;
+  # Start systemd in initrd (required for the overlayfs above)
+  #boot.initrd.systemd.enable = true;
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/0fe295a7-5cf9-49b3-8d7e-ee659bbfaf32";
-      fsType = "btrfs";
-      options = [ "subvol=@" ];
+  # Devices and mounts
+
+  boot.initrd.luks.devices = {
+#    keyholder = {
+#      device = "/dev/disk/by-partlabel/Keyholder";
+#      preLVM = true;
+#      allowDiscards = true;
+#      passphrase = "R5uYiCQzPLky2gFwig8K";
+#    };
+    main = {
+      device = "/dev/disk/by-partlabel/lvm-root";
+#      keyFile = "/path/to/mounted/keyholder/keyfile";
+      allowDiscards = true;
     };
+  };
 
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/0fe295a7-5cf9-49b3-8d7e-ee659bbfaf32";
-      fsType = "btrfs";
-      options = [ "subvol=@home" ];
-    };
+  # Mount the Btrfs subvolumes
+  fileSystems."/" = {
+    device = "/dev/vgmint/nix-root";
+    fsType = "btrfs";
+    options = [ "subvol=@" ];
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/DD85-AC6F";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
+  fileSystems."/home" = {
+    device = "/dev/vgmint/nix-root";
+    fsType = "btrfs";
+    options = [ "subvol=@home" ];
+  };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/cd567b69-0dc3-448e-8328-334d059e5e90"; }
-    ];
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-partlabel/nix-efi";
+    fsType = "vfat";
+  };
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp6s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp5s0.useDHCP = lib.mkDefault true;
+  swapDevices = [
+    {
+      device = "/dev/vgmint/swap_1";
+    }
+  ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.enableRedistributableFirmware = true;
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
