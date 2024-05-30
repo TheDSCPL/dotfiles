@@ -29,6 +29,7 @@ let
     programs.zsh.enable = true;
     environment.shells = [ pkgs.zsh ];
     users.defaultUserShell = pkgs.zsh;
+    security.rtkit.enable = true;
   }
   # System packages
   {
