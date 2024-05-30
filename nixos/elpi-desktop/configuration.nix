@@ -13,8 +13,9 @@ let
   };
 
   cfg =
+  merge
   # General configurations
-  merge {
+  {
     # Timezone
     time.timeZone = hostConsts.timezone;
     i18n.defaultLocale = hostConsts.locale;
@@ -54,6 +55,10 @@ let
       unzip
       zip
       tree
+      # Notifications
+      dunst
+      libnotify
+      gnome.adwaita-icon-theme
     ];
   }
   # T GUI
