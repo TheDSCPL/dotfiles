@@ -49,8 +49,8 @@
         nvidiaPersistenced = true;
         # nvidiaSettings = false;
       };
-      # This option will expose GPUs on containers with the --device CLI option
-      nvidia-container-toolkit.enable = true;
+      # This option will expose GPUs on containers with the --device CLI option (available from 24.05)
+      # nvidia-container-toolkit.enable = true;
       opengl = {
         enable = true;
         driSupport = true;
