@@ -197,6 +197,6 @@ in
       };
     };
   };
-  config = cfg;
+  config = removeAttrs cfg [ "__functor" ];
 }
 
