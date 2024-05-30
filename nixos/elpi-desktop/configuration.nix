@@ -3,7 +3,14 @@ let
   hostConsts = config.hostConsts;
 #  system = nixpkgs.hostPlatform;
 
-  merge = lib.attrsets.recursiveUpdate;
+  merge =
+  let
+    f = self: newAttrSet: (lib.attrsets.recursiveUpdate self newAttrSet) // {
+      __functor = f;
+    };
+  in attrSet: attrSet // {
+    __functor = f;
+  };
 
   cfg =
   # General configurations
@@ -22,7 +29,7 @@ let
     programs.zsh.enable = true;
     environment.shells = [ pkgs.zsh ];
     users.defaultUserShell = pkgs.zsh;
-  } (merge
+  }
   # System packages
   {
     # Install NeoVim and use it globally as default editor
@@ -47,7 +54,7 @@ let
       zip
       tree
     ];
-  } (merge
+  }
   # T GUI
   {
     # TODO: add the rest of the GUI config
@@ -63,7 +70,7 @@ let
     # From 24.05
     #services.libinput.enable = true;
     #services.displayManager.defaultSession = "gnome";
-  } (merge
+  }
   # Sound
   {
     sound.enable = true;
@@ -75,7 +82,7 @@ let
       pulse.enable = true;
       jack.enable = true;
     };
-  } (merge
+  }
   # Services
   {
     # Enable CUPS to print documents.
@@ -96,7 +103,7 @@ let
       };
       udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
     };
-  } (merge
+  }
   # Networking
   {
     # Enable the NetworkManager service to configure network connections.
@@ -121,7 +128,7 @@ let
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-  } (merge
+  }
   # T Nix
   {
     # TODO: set nixpkgs channel to this flake's configured nixpkgs input
@@ -159,7 +166,7 @@ let
       initialPassword = "password";
       shell = pkgs.zsh;
     };
-  }))))));
+  };
 in
 {
   options = {
