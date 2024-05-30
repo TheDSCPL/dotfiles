@@ -85,6 +85,11 @@ let
     hardware = {
       nvidia = {
         # open = true;
+        package = config.boot.kernelPackages.nvidiaPackages.stable.overrideScope (nvidiaFinal: nvidiaPrev: {
+          open = nvidiaPrev.open.overrideAttrs (oldAttrs: {
+            makeFlags = oldAttrs.makeFlags + [ "HOSTNAME=${hostConsts.hostname}" ];
+          });
+        });
         powerManagement.enable = true;
         modesetting.enable = true;
         nvidiaPersistenced = true;
