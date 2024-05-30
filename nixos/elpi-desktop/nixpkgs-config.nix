@@ -100,7 +100,7 @@
       })
       (final: prev: {
         # Disable unknown CC flag
-        gtksourceview = prev.gtksourceview.overrideAttrs (oldAttrs: {
+        gtksourceview5 = prev.gtksourceview5.overrideAttrs (oldAttrs: {
           patches = (oldAttrs.patches or []) ++ [
             ./gtksourceview-disable-incompatible-function-pointers-CC-warning-flag.patch
           ];
