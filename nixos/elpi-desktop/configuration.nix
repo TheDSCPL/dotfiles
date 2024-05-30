@@ -12,6 +12,8 @@ let
     __functor = f;
   };
 
+  nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.stable;
+
   cfg =
   merge
   # General configurations
@@ -85,11 +87,11 @@ let
     hardware = {
       nvidia = {
         # open = true;
-        package = config.boot.kernelPackages.nvidiaPackages.stable.overrideScope (nvidiaFinal: nvidiaPrev: {
-          open = nvidiaPrev.open.overrideAttrs (oldAttrs: {
+        package = nvidiaPackage // {
+          open = nvidiaPackage.open.overrideAttrs (oldAttrs: {
             makeFlags = oldAttrs.makeFlags + [ "HOSTNAME=${hostConsts.hostname}" ];
           });
-        });
+        };
         powerManagement.enable = true;
         modesetting.enable = true;
         nvidiaPersistenced = true;
