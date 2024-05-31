@@ -86,7 +86,7 @@ let
     services.xserver.videoDrivers = [ "nvidia" ];
     hardware = {
       nvidia = {
-        # open = true;
+        open = true;
         package = nvidiaPackage // {
           open = nvidiaPackage.open.overrideAttrs (oldAttrs: {
             makeFlags = oldAttrs.makeFlags + [ "HOSTNAME=${hostConsts.hostname}" ];
@@ -170,7 +170,7 @@ let
         # Adds ~/.ssh/authorizedKeys to authorizedKeysFiles (from 24.05)
         # authorizedKeysInHomedir = true;
         settings = {
-          # PermitRootLogin = "yes";
+          PermitRootLogin = "yes";
           PasswordAuthentication = true;
         };
       };
