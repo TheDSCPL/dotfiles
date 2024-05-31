@@ -89,7 +89,7 @@ let
         open = true;
         package = nvidiaPackage // {
           open = nvidiaPackage.open.overrideAttrs (oldAttrs: {
-            makeFlags = oldAttrs.makeFlags + [ "HOSTNAME=${hostConsts.hostname}" ];
+            makeFlags = oldAttrs.makeFlags ++ [ "HOSTNAME=${hostConsts.hostname}" ];
           });
         };
         powerManagement.enable = true;
