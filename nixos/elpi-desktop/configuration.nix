@@ -112,7 +112,6 @@ let
         };
         modesetting.enable = true;
         nvidiaPersistenced = true;
-        prime.offload.enable = true;
         # nvidiaSettings = false;
       };
       # This option will expose GPUs on containers with the --device CLI option (available from 24.05)
