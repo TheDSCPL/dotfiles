@@ -174,6 +174,7 @@ let
         __NV_PRIME_RENDER_OFFLOAD = "1";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
         __VK_LAYER_NV_optimus = "NVIDIA_only";
+        CINNAMON_DEBUG="1";
       } /* // {
         # https://gist.github.com/sioodmy/1932583dd8a804e0b3fe86416b923a16#tweak-your-configurationnix
         # Wayland configs
