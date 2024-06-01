@@ -83,6 +83,7 @@ let
     # Enable the Cinnamon Desktop Environment.
     services.xserver.desktopManager.cinnamon.enable = true;
     services.xserver.displayManager.lightdm.enable = true;
+    services.xserver.displayManager.lightdm.pam.services = ["gnome-keyring"];
     /* services.xserver.config = ''
       Section "Device"
           Identifier     "NVIDIA Card"
@@ -92,7 +93,7 @@ let
           Option         "NoLogo" "true"
           Option         "UseEDID" "false"
           Option         "ModeValidation" "NoVesaModes, NoXServerModes"
-          Option         "UseDisplayDevice" "DFP"
+          Option         "UseDisplayDevice" "DFP-0"
       EndSection
 
       Section "Screen"
@@ -121,6 +122,13 @@ let
 
     # NVIDIA
     services.xserver.videoDrivers = lib.mkForce [ "nvidia" ];
+    services.xserver.deviceSection = ''
+      BusID "${config.hardware.nvidia.prime.nvidiaBusId}"
+      VendorName     "NVIDIA Corporation"
+      BoardName      "GeForce RTX 3090"
+      Option         "NoLogo" "true"
+      Option         "UseDisplayDevice" "DP-4"
+    '';
 
     hardware = {
       nvidia = {
