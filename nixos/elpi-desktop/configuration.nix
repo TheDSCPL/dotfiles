@@ -106,10 +106,7 @@ let
       nvidia = {
         open = false;
         package = nvidiaPackage;
-        powerManagement = {
-          enable = true;
-          finegrained = true;
-        };
+        powerManagement.enable = true;
         modesetting.enable = true;
         nvidiaPersistenced = true;
         # nvidiaSettings = false;
