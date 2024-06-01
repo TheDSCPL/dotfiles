@@ -91,11 +91,8 @@ let
     ];
 
     # Enable libinput for mouse events
-    services.xserver.libinput.enable = true;
-    services.xserver.displayManager.defaultSession = "cinnamon";
-    # From 24.05
-    #services.libinput.enable = true;
-    #services.displayManager.defaultSession = "cinnamon";
+    services.libinput.enable = true;
+    services.displayManager.defaultSession = "cinnamon";
 
     fonts.fontDir.enable = true;
     fonts.packages = with pkgs; [
@@ -114,7 +111,7 @@ let
         # nvidiaSettings = false;
       };
       # This option will expose GPUs on containers with the --device CLI option (available from 24.05)
-      # nvidia-container-toolkit.enable = true;
+      nvidia-container-toolkit.enable = true;
       opengl = {
         enable = true;
         driSupport = true;
@@ -184,7 +181,7 @@ let
       openssh = {
         enable = true;
         # Adds ~/.ssh/authorizedKeys to authorizedKeysFiles (from 24.05)
-        # authorizedKeysInHomedir = true;
+        authorizedKeysInHomedir = true;
         settings = {
           PermitRootLogin = "yes";
           PasswordAuthentication = true;
