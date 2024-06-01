@@ -30,6 +30,7 @@ let
     time.timeZone = hostConsts.timezone;
     i18n.defaultLocale = hostConsts.locale;
     services.xserver.xkb.layout = hostConsts.keyboardLayout;
+    services.xserver.xkb.variant = "nativo";
 
     # Console
     console = {
