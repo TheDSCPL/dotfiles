@@ -83,6 +83,25 @@ let
     # Enable the Cinnamon Desktop Environment.
     services.xserver.desktopManager.cinnamon.enable = true;
     services.xserver.displayManager.lightdm.enable = true;
+    services.xserver.config = ''
+      Section "Device"
+          Identifier     "NVIDIA Card"
+          Driver         "nvidia"
+          VendorName     "NVIDIA Corporation"
+          BoardName      "GeForce RTX 3090"
+          Option         "NoLogo" "true"
+          Option         "UseEDID" "false"
+          Option         "ModeValidation" "NoVesaModes, NoXServerModes"
+          Option         "UseDisplayDevice" "DFP"
+      EndSection
+
+      Section "Screen"
+          Identifier     "Screen0"
+          Device         "NVIDIA Card"
+          Option         "UseDisplayDevice" "DFP"
+          Option         "ModeValidation" "NoVesaModes, NoXServerModes"
+      EndSection
+    '';
     environment.cinnamon.excludePackages = with pkgs; [
       # Exclude screen reader
       orca
