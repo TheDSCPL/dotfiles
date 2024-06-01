@@ -118,7 +118,6 @@ let
       };
       # This option will expose GPUs on containers with the --device CLI option (available from 24.05)
       nvidia-container-toolkit.enable = true;
-      virtualisation.docker.enableNvidia = true;
       opengl = {
         enable = true;
         driSupport = true;
@@ -137,6 +136,7 @@ let
       };
       # pulseaudio.support32Bit = true;
     };
+    virtualisation.docker.enableNvidia = true;
 
     environment = {
       variables = {
