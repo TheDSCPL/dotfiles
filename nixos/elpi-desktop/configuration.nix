@@ -112,7 +112,7 @@ let
 
     # Enable libinput for mouse events
     services.libinput.enable = true;
-    services.displayManager.defaultSession = "Cinnamon";
+    services.displayManager.defaultSession = "cinnamon";
 
     fonts.fontDir.enable = true;
     fonts.packages = with pkgs; [
