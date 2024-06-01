@@ -101,6 +101,17 @@ let
 
     # NVIDIA
     services.xserver.videoDrivers = [ "nvidia" ];
+    services.xserver.deviceSection = ''
+      Section "Device"
+          Identifier     "Device0"
+          Driver         "nvidia"
+          VendorName     "NVIDIA Corporation"
+          Option         "NoLogo" "true"
+          Option         "Coolbits" "4"
+          Option         "TripleBuffer" "true"
+          Option         "metamodes" "nvidia-auto-select +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
+      EndSection
+    '';
     hardware = {
       nvidia = {
         open = false;
@@ -221,8 +232,6 @@ let
   }
   # T Nix
   {
-    # TODO: set nixpkgs channel to this flake's configured nixpkgs input
-
     nixpkgs.config.allowUnfree = true;
     nixpkgs.config.allowBroken = true;
     nix.package = pkgs.nixFlakes;
