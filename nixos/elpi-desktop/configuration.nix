@@ -101,19 +101,7 @@ let
 
     # NVIDIA
     services.xserver.videoDrivers = [ "nvidia" ];
-    services.xserver.config = ''
-      Section "Device"
-          Identifier     "Device0"
-          Driver         "nvidia"
-          VendorName     "NVIDIA Corporation"
-          Option         "NoLogo" "true"
-      EndSection
-
-      Section "Screen"
-          Identifier     "Screen0"
-          Device         "Device0"
-      EndSection
-    '';
+    hardware.nvidia.prime.nvidiaBusId = "PCI:a:0:0";
 
     hardware = {
       nvidia = {
