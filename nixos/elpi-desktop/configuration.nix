@@ -83,7 +83,7 @@ let
     # Enable the Cinnamon Desktop Environment.
     services.xserver.desktopManager.cinnamon.enable = true;
     services.xserver.displayManager.lightdm.enable = true;
-    services.xserver.config = ''
+    /* services.xserver.config = ''
       Section "Device"
           Identifier     "NVIDIA Card"
           Driver         "nvidia"
@@ -101,7 +101,7 @@ let
           Option         "UseDisplayDevice" "DFP"
           Option         "ModeValidation" "NoVesaModes, NoXServerModes"
       EndSection
-    '';
+    ''; */
     services.xserver.exportConfiguration = true;
     environment.cinnamon.excludePackages = with pkgs; [
       # Exclude screen reader
