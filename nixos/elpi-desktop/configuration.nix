@@ -177,9 +177,9 @@ let
   }
   # Services
   {
-    # Enable CUPS to print documents.
-    # services.printing.enable = true;
     services = {
+      # Enable CUPS to print documents.
+      printing.enable = true;
       openssh = {
         enable = true;
         # Adds ~/.ssh/authorizedKeys to authorizedKeysFiles (from 24.05)
