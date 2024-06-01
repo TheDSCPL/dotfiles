@@ -12,6 +12,7 @@ let
     __functor = f;
   };
 
+  # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/os-specific/linux/nvidia-x11/default.nix#L35
   nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.mkDriver {
     version = "550.78";
     sha256_64bit = "sha256-NAcENFJ+ydV1SD5/EcoHjkZ+c/be/FQ2bs+9z+Sjv3M=";
@@ -53,6 +54,7 @@ let
     };
 
     environment.systemPackages = with pkgs; [
+      alacritty
       htop
       vim
       git
@@ -69,20 +71,30 @@ let
       libnotify
       gnome.adwaita-icon-theme
     ];
+
+    # Set Alacritty as default terminal
+    environment.variables.TERMINAL = "alacritty";
   }
   # T GUI
   {
     # Enable X11 (gave up from Wayland after 3 weeks of trying to make it work with NVIDIA)
     services.xserver.enable = true;
-    # Enable the GNOME Desktop Environment.
-    services.xserver.displayManager.gdm.enable = true;
-    services.xserver.desktopManager.gnome.enable = true;
-    # Enable libinput for mouse events
-    services.xserver.libinput.enable = true;
-    services.xserver.displayManager.defaultSession = "gnome";
+
+    # Enable the Cinnamon Desktop Environment.
+    services.xserver.desktopManager.cinnamon.enable = true;
+    environment.cinnamon.excludePackages = with pkgs; [
+      # Exclude screen reader
+      orca
+      # Exclude GNOME Terminal (using Alacritty terminal emulator)
+      gnome.gnome-terminal
+    ];
+
+    # Enable libinput for mouse events (enabled by default in Cinnamon)
+    #services.xserver.libinput.enable = true;
+    services.xserver.displayManager.defaultSession = "cinnamon";
     # From 24.05
     #services.libinput.enable = true;
-    #services.displayManager.defaultSession = "gnome";
+    #services.displayManager.defaultSession = "cinnamon";
 
     fonts.fontDir.enable = true;
     fonts.packages = with pkgs; [
@@ -94,17 +106,7 @@ let
     hardware = {
       nvidia = {
         open = true;
-        package = nvidiaPackage /* // {
-          open = nvidiaPackage.open.overrideAttrs (oldAttrs: {
-            makeFlags = oldAttrs.makeFlags ++ [ "HOSTNAME=${hostConsts.hostname}" ];
-            patches = (oldAttrs.patches or []) ++ [
-              # https://github.com/NVIDIA/open-gpu-kernel-modules/issues/574
-              # https://github.com/NVIDIA/open-gpu-kernel-modules/pull/589
-              # https://github.com/NVIDIA/open-gpu-kernel-modules/commit/01563f41caeb0830de3a8f1ff888aad1bf436bd9.patch
-              ./patches/nvidia-545.29.02-crypto_tfm_ctx_aligned.patch
-            ];
-          });
-        } */;
+        package = nvidiaPackage;
         powerManagement.enable = true;
         modesetting.enable = true;
         nvidiaPersistenced = true;

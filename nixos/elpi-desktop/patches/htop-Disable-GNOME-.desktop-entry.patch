@@ -1,0 +1,36 @@
+From e8e701a7f471c617f4119c00e8b9d64e234d8916 Mon Sep 17 00:00:00 2001
+From: TheDSCPL <kpvrzlzzx@mozmail.com>
+Date: Sat, 1 Jun 2024 16:14:52 +0000
+Subject: [PATCH] Disable GNOME .desktop entry
+
+---
+ Makefile.am | 9 ---------
+ 1 file changed, 9 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 8af1864a..99770f01 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -10,19 +10,10 @@ dist_man_MANS = htop.1
+ EXTRA_DIST = \
+ 	$(dist_man_MANS) \
+ 	autogen.sh \
+-	htop.desktop \
+-	htop.png \
+-	htop.svg \
+ 	build-aux/compile \
+ 	build-aux/depcomp \
+ 	build-aux/install-sh \
+ 	build-aux/missing
+-applicationsdir = $(datadir)/applications
+-applications_DATA = htop.desktop
+-pixmapdir = $(datadir)/pixmaps
+-pixmap_DATA = htop.png
+-appicondir = $(datadir)/icons/hicolor/scalable/apps
+-appicon_DATA = htop.svg
+ 
+ AM_CFLAGS += -pedantic -std=c99 -D_XOPEN_SOURCE_EXTENDED -DSYSCONFDIR="\"$(sysconfdir)\"" -I"$(top_srcdir)/$(my_htop_platform)"
+ AM_LDFLAGS =
+-- 
+2.39.1
+
