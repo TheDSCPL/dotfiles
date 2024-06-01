@@ -90,6 +90,12 @@ let
         package = nvidiaPackage // {
           open = nvidiaPackage.open.overrideAttrs (oldAttrs: {
             makeFlags = oldAttrs.makeFlags ++ [ "HOSTNAME=${hostConsts.hostname}" ];
+            patches = (oldAttrs.patches or []) ++ [
+              # https://github.com/NVIDIA/open-gpu-kernel-modules/issues/574
+              # https://github.com/NVIDIA/open-gpu-kernel-modules/pull/589
+              # https://github.com/NVIDIA/open-gpu-kernel-modules/commit/01563f41caeb0830de3a8f1ff888aad1bf436bd9.patch
+              ./patches/nvidia-545.29.02-crypto_tfm_ctx_aligned.patch
+            ];
           });
         };
         powerManagement.enable = true;
