@@ -101,7 +101,6 @@ let
 
     # NVIDIA
     services.xserver.videoDrivers = [ "nvidia" ];
-    hardware.nvidia.prime.nvidiaBusId = "PCI:a:0:0";
 
     hardware = {
       nvidia = {
@@ -110,6 +109,7 @@ let
         powerManagement.enable = true;
         modesetting.enable = true;
         nvidiaPersistenced = true;
+        prime.nvidiaBusId = "PCI:a:0:0";
         # nvidiaSettings = false;
       };
       # This option will expose GPUs on containers with the --device CLI option (available from 24.05)
