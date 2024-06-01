@@ -112,7 +112,6 @@ let
         };
         modesetting.enable = true;
         nvidiaPersistenced = true;
-        prime.nvidiaBusId = "PCI:a:0:0";
         prime.offload.enable = true;
         # nvidiaSettings = false;
       };
