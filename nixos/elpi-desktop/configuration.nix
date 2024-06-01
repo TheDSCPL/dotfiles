@@ -126,7 +126,7 @@ let
       VendorName     "NVIDIA Corporation"
       BoardName      "GeForce RTX 3090"
       Option         "NoLogo" "true"
-      Option         "UseDisplayDevice" "DP-4"
+      Option         "UseDisplayDevice" "DFP-5"
     '';
 
     hardware = {
