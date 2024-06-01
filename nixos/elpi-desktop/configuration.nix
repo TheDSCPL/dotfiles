@@ -82,6 +82,7 @@ let
 
     # Enable the Cinnamon Desktop Environment.
     services.xserver.desktopManager.cinnamon.enable = true;
+    services.xserver.displayManager.lightdm.enable = true;
     environment.cinnamon.excludePackages = with pkgs; [
       # Exclude screen reader
       orca
@@ -89,8 +90,8 @@ let
       gnome.gnome-terminal
     ];
 
-    # Enable libinput for mouse events (enabled by default in Cinnamon)
-    #services.xserver.libinput.enable = true;
+    # Enable libinput for mouse events
+    services.xserver.libinput.enable = true;
     services.xserver.displayManager.defaultSession = "cinnamon";
     # From 24.05
     #services.libinput.enable = true;
