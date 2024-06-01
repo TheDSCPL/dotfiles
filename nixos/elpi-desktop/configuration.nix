@@ -101,17 +101,20 @@ let
 
     # NVIDIA
     services.xserver.videoDrivers = [ "nvidia" ];
-    services.xserver.deviceSection = ''
+    services.xserver.config = ''
       Section "Device"
           Identifier     "Device0"
           Driver         "nvidia"
           VendorName     "NVIDIA Corporation"
           Option         "NoLogo" "true"
-          Option         "Coolbits" "4"
-          Option         "TripleBuffer" "true"
-          Option         "metamodes" "nvidia-auto-select +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
+      EndSection
+
+      Section "Screen"
+          Identifier     "Screen0"
+          Device         "Device0"
       EndSection
     '';
+
     hardware = {
       nvidia = {
         open = false;
