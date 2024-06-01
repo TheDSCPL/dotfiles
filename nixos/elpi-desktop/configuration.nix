@@ -1,6 +1,5 @@
-{ config, lib, pkgs, flakeOutputArgs, ... }:
+{ config, lib, pkgs, ... }:
 let
-  nixpkgs-unstable = flakeOutputArgs.nixpkgs-unstable;
   hostConsts = config.hostConsts;
 #  system = nixpkgs.hostPlatform;
 
