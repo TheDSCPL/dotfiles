@@ -83,7 +83,6 @@ let
     # Enable the Cinnamon Desktop Environment.
     services.xserver.desktopManager.cinnamon.enable = true;
     services.xserver.displayManager.lightdm.enable = true;
-    services.xserver.displayManager.lightdm.pam.services = ["gnome-keyring"];
     /* services.xserver.config = ''
       Section "Device"
           Identifier     "NVIDIA Card"
