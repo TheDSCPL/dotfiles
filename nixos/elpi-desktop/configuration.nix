@@ -103,7 +103,7 @@ let
       EndSection
     ''; */
     services.xserver.exportConfiguration = true;
-    services.xserver.verbose = true;
+    services.xserver.verbose = 7;
     services.xserver.logFile = "/var/log/fcking-xorg.log";
     environment.cinnamon.excludePackages = with pkgs; [
       # Exclude screen reader
