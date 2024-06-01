@@ -102,6 +102,7 @@ let
           Option         "ModeValidation" "NoVesaModes, NoXServerModes"
       EndSection
     '';
+    services.xserver.exportConfiguration = true;
     environment.cinnamon.excludePackages = with pkgs; [
       # Exclude screen reader
       orca
