@@ -1,5 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, flakeOutputArgs, ... }:
 let
+  nixpkgs-unstable = flakeOutputArgs.nixpkgs-unstable;
   hostConsts = config.hostConsts;
 #  system = nixpkgs.hostPlatform;
 
@@ -12,7 +13,14 @@ let
     __functor = f;
   };
 
-  nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.stable;
+  nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+    version = "550.78";
+    sha256_64bit = "sha256-NAcENFJ+ydV1SD5/EcoHjkZ+c/be/FQ2bs+9z+Sjv3M=";
+    sha256_aarch64 = "sha256-2POG5RWT2H7Rhs0YNfTGHO64Q8u5lJD9l/sQCGVb+AA=";
+    openSha256 = "sha256-cF9omNvfHx6gHUj2u99k6OXrHGJRpDQDcBG3jryf41Y=";
+    settingsSha256 = "sha256-lZiNZw4dJw4DI/6CI0h0AHbreLm825jlufuK9EB08iw=";
+    persistencedSha256 = "sha256-qDGBAcZEN/ueHqWO2Y6UhhXJiW5625Kzo1m/oJhvbj4=";
+  };
 
   cfg =
   merge
@@ -87,7 +95,7 @@ let
     hardware = {
       nvidia = {
         open = true;
-        package = nvidiaPackage // {
+        package = nvidiaPackage /* // {
           open = nvidiaPackage.open.overrideAttrs (oldAttrs: {
             makeFlags = oldAttrs.makeFlags ++ [ "HOSTNAME=${hostConsts.hostname}" ];
             patches = (oldAttrs.patches or []) ++ [
@@ -97,7 +105,7 @@ let
               ./patches/nvidia-545.29.02-crypto_tfm_ctx_aligned.patch
             ];
           });
-        };
+        } */;
         powerManagement.enable = true;
         modesetting.enable = true;
         nvidiaPersistenced = true;
