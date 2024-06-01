@@ -100,20 +100,25 @@ let
     ];
 
     # NVIDIA
-    services.xserver.videoDrivers = [ "nvidia" ];
+    services.xserver.videoDrivers = lib.mkForce [ "nvidia" ];
 
     hardware = {
       nvidia = {
         open = false;
         package = nvidiaPackage;
-        powerManagement.enable = true;
+        powerManagement = {
+          enable = true;
+          finegrained = true;
+        };
         modesetting.enable = true;
         nvidiaPersistenced = true;
         prime.nvidiaBusId = "PCI:a:0:0";
+        prime.offload.enable = true;
         # nvidiaSettings = false;
       };
       # This option will expose GPUs on containers with the --device CLI option (available from 24.05)
       nvidia-container-toolkit.enable = true;
+      virtualisation.docker.enableNvidia = true;
       opengl = {
         enable = true;
         driSupport = true;
