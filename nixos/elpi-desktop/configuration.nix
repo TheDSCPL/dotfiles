@@ -325,9 +325,6 @@ let
         };
       };
     };
-    hardware.firmware = [
-      pkgs.intel-bluetooth-firmware
-    ];
     services.blueman.enable = true;
   }
   # Nix
