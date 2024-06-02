@@ -71,25 +71,25 @@ let
 
       # https://wiki.archlinux.org/title/Sysctl#Improving_performance
       # Default: 212992
-      "net.core.rmem_max = 16777216"
+      "net.core.rmem_max=16777216"
       # Default: 212992
-      "net.core.wmem_max = 16777216"
+      "net.core.wmem_max=16777216"
       # Default: 131072
-      "net.core.optmem_max = 65536"
+      "net.core.optmem_max=65536"
       # Default: 4096        131072  6291456
-      "net.ipv4.tcp_rmem = 4096 1048576 2097152"
+      "net.ipv4.tcp_rmem=4096 1048576 2097152"
       # Default: 4096        16384   4194304
-      "net.ipv4.tcp_wmem = 4096 65536 16777216"
+      "net.ipv4.tcp_wmem=4096 65536 16777216"
       # Default: 4096
-      "net.ipv4.udp_rmem_min = 8192"
+      "net.ipv4.udp_rmem_min=8192"
       # Default: 4096
-      "net.ipv4.udp_wmem_min = 8192"
+      "net.ipv4.udp_wmem_min=8192"
       # Default: 2048
-      "net.ipv4.tcp_max_syn_backlog = 8192"
+      "net.ipv4.tcp_max_syn_backlog=8192"
       # Default: 1
-      "net.ipv4.tcp_slow_start_after_idle = 0"
+      "net.ipv4.tcp_slow_start_after_idle=0"
       # Default: 0
-      "net.ipv4.tcp_mtu_probing = 1"
+      "net.ipv4.tcp_mtu_probing=1"
     ];
 
     environment.systemPackages = with pkgs; [
