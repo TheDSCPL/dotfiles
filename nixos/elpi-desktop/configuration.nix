@@ -77,9 +77,9 @@ let
       # Default: 131072
       "net.core.optmem_max=65536"
       # Default: 4096        131072  6291456
-      "net.ipv4.tcp_rmem=4096 1048576 2097152"
+      ''net.ipv4.tcp_rmem="4096 1048576 2097152"''
       # Default: 4096        16384   4194304
-      "net.ipv4.tcp_wmem=4096 65536 16777216"
+      ''net.ipv4.tcp_wmem="4096 65536 16777216"''
       # Default: 4096
       "net.ipv4.udp_rmem_min=8192"
       # Default: 4096
