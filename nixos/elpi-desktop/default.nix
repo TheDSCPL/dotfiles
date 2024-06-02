@@ -6,7 +6,8 @@ nixpkgs.lib.nixosSystem {
       config.hostConsts = {
         hostname       = "elpi-desktop";
         timezone       = "Atlantic/Azores";
-        locale         = "pt_PT.UTF-8";
+        #locale         = "pt_PT.UTF-8";
+        locale         = "en_US.UTF-8";
         keyboardLayout = "pt";
         user = {
           name     = "Elpi";
