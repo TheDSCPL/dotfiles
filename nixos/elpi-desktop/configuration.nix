@@ -41,7 +41,7 @@ let
     programs.zsh.enable = true;
     environment.shells = [ pkgs.zsh ];
     users.defaultUserShell = pkgs.zsh;
-    #security.rtkit.enable = true;
+    security.rtkit.enable = true;
   }
   # System packages
   {
@@ -53,6 +53,44 @@ let
       enable = true;
       enableSSHSupport = true;
     };
+
+    programs.gamemode.enable = true;
+    programs.tuxclocker = {
+      enable = true;
+      useUnfree = true;
+    };
+    # Controller for peripherals RGB lights
+    services.hardware.openrgb = {
+      enable = true;
+      package = pkgs.openrgb-with-all-plugins;
+      motherboard = "amd";
+    };
+    boot.kernelParams = [
+      # https://gitlab.com/CalcProgrammer1/OpenRGB#kernel-parameters
+      "acpi_enforce_resources=lax"
+
+      # https://wiki.archlinux.org/title/Sysctl#Improving_performance
+      # Default: 212992
+      "net.core.rmem_max = 16777216"
+      # Default: 212992
+      "net.core.wmem_max = 16777216"
+      # Default: 131072
+      "net.core.optmem_max = 65536"
+      # Default: 4096        131072  6291456
+      "net.ipv4.tcp_rmem = 4096 1048576 2097152"
+      # Default: 4096        16384   4194304
+      "net.ipv4.tcp_wmem = 4096 65536 16777216"
+      # Default: 4096
+      "net.ipv4.udp_rmem_min = 8192"
+      # Default: 4096
+      "net.ipv4.udp_wmem_min = 8192"
+      # Default: 2048
+      "net.ipv4.tcp_max_syn_backlog = 8192"
+      # Default: 1
+      "net.ipv4.tcp_slow_start_after_idle = 0"
+      # Default: 0
+      "net.ipv4.tcp_mtu_probing = 1"
+    ];
 
     environment.systemPackages = with pkgs; [
       alacritty
@@ -66,7 +104,22 @@ let
       cryptsetup
       unzip
       zip
+      # NVIDIA controls and overclocking
+      gwe
+      # GPU-only screen recorder
+      gpu-screen-recorder-gtk
       tree
+      nix-tree
+      # Temperature sensors poller
+      lm_sensors
+      # Audio effects
+      easyeffects
+      # Pipewire patchbay (audio routing)
+      helvum
+      # Game micro-compositor
+      gamescope
+      # Windows games compatibility layer
+      lutris
       # Notifications
       dunst
       libnotify
@@ -122,6 +175,8 @@ let
 
     # NVIDIA
     services.xserver.videoDrivers = lib.mkForce [ "nvidia" ];
+    # Coolbits 31: Enable all overclocking options
+    # https://wiki.archlinux.org/title/NVIDIA/Tips_and_tricks#Enabling_overclocking
     services.xserver.deviceSection = ''
       BusID          "${config.hardware.nvidia.prime.nvidiaBusId}"
       VendorName     "NVIDIA Corporation"
@@ -129,6 +184,7 @@ let
       Option         "NoLogo" "true"
       Option         "UseDisplayDevice" "DFP-5"
       Option         "AllowEmptyInitialConfiguration"
+      Option         "Coolbits" "31"
     '';
 
     hardware = {
@@ -168,9 +224,12 @@ let
         # VA-API NVIDIA
         LIBVA_DRIVER_NAME = "nvidia";
         PROTON_ENABLE_NVAPI="1";
+        PROTON_ENABLE_NGX_UPDATER="1";
+        DXVK_ASYNC="1";
         DXVK_ENABLE_NVAPI="1";
         NVD_BACKEND = "direct";
         GBM_BACKEND = "nvidia-drm";
+        VKD3D_CONFIG="dxr11,dxr";
         __GL_GSYNC_ALLOWED = "0";
         __GL_VRR_ALLOWED = "0";
         DIRENV_LOG_FORMAT = "";
@@ -256,8 +315,10 @@ let
   {
     nixpkgs.config.allowUnfree = true;
     nixpkgs.config.allowBroken = true;
+    nixpkgs.flake.setNixPath = true;
+    nixpkgs.flake.setFlakeRegistry = true;
     nix.package = pkgs.nixFlakes;
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.settings.experimental-features = [ "nix-command" "flakes" "repl-flake" ];
     # This option defines the first version of NixOS you have installed on this particular machine,
     # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
     #
