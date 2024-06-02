@@ -70,6 +70,7 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.enableRedistributableFirmware = true;
+  hardware.enableAllFirmware = lib.mkForce true;
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   #hardware.nvidia.prime.nvidiaBusId = "PCI:10:0:0";
