@@ -129,7 +129,7 @@ let
     # Set Alacritty as default terminal
     environment.variables.TERMINAL = "alacritty";
   }
-  # T GUI
+  # GUI
   {
     # Enable X11 (gave up from Wayland after 3 weeks of trying to make it work with NVIDIA)
     services.xserver.enable = true;
@@ -259,13 +259,16 @@ let
     hardware.pulseaudio.enable = false;
     services.pipewire = {
       enable = true;
+      audio.enable = true;
+      # Add RAOP/Airplay ports to firewall
+      #raopOpenFirewall = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
     };
   }
-  # Services
+  # T Services
   {
     services = {
       # Enable CUPS to print documents.
@@ -284,6 +287,8 @@ let
         packages = with pkgs; [ dconf ];
       };
       udev.packages = [ nvidiaPackage ];
+      # TODO: Add this to a git encrypted file
+      #services.cloudflared.enable
     };
   }
   # Networking
@@ -322,7 +327,7 @@ let
     };
     services.blueman.enable = true;
   }
-  # T Nix
+  # Nix
   {
     nixpkgs.config.allowUnfree = true;
     nixpkgs.config.allowBroken = true;
