@@ -13,7 +13,7 @@
   # Boot
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" "usb_storage" "dm_mod" "dm_crypt" "btrfs" "dm_mod" "dm_snapshot" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ "kvm-amd" "btusb" "btrtl" "btintel" "bluetooth" ];
   boot.extraModulePackages = [ ];
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub = {
