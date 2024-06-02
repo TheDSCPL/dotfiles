@@ -324,7 +324,6 @@ let
           Experimental = true;
         };
       };
-      firmware = pkgs.bluez-firmware;
     };
     services.blueman.enable = true;
   }
