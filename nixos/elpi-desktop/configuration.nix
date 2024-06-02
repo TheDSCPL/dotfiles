@@ -223,7 +223,7 @@ let
         enable = true;
         packages = with pkgs; [ dconf ];
       };
-      # udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+      udev.packages = [ nvidiaPackage ];
     };
   }
   # Networking
