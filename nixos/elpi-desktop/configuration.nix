@@ -371,7 +371,7 @@ let
         "lp"
         "users"
         "kvm"
-      ] ++ lib.optional config.programs.gamemode.enable [ "gamemode" ];
+      ] ++ lib.optional config.programs.gamemode.enable "gamemode";
       initialPassword = "password";
       shell = pkgs.zsh;
     };
