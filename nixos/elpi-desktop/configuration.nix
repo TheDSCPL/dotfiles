@@ -41,7 +41,7 @@ let
     programs.zsh.enable = true;
     environment.shells = [ pkgs.zsh ];
     users.defaultUserShell = pkgs.zsh;
-    security.rtkit.enable = true;
+    #security.rtkit.enable = true;
   }
   # System packages
   {
@@ -172,7 +172,7 @@ let
         __GL_GSYNC_ALLOWED = "0";
         __GL_VRR_ALLOWED = "0";
         DIRENV_LOG_FORMAT = "";
-        __NV_PRIME_RENDER_OFFLOAD = "1";
+        #__NV_PRIME_RENDER_OFFLOAD = "1";
         __GLX_VENDOR_LIBRARY_NAME = "nvidia";
         __VK_LAYER_NV_optimus = "NVIDIA_only";
         CINNAMON_DEBUG="1";

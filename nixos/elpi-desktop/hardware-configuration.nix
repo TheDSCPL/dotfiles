@@ -72,5 +72,5 @@
   hardware.enableRedistributableFirmware = true;
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  hardware.nvidia.prime.nvidiaBusId = "PCI:10:0:0";
+  #hardware.nvidia.prime.nvidiaBusId = "PCI:10:0:0";
 }
