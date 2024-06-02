@@ -29,14 +29,14 @@ let
     # Timezone
     time.timeZone = hostConsts.timezone;
     i18n.defaultLocale = hostConsts.locale;
-    #services.xserver.xkb.layout = hostConsts.keyboardLayout;
+    services.xserver.xkb.layout = hostConsts.keyboardLayout;
     #services.xserver.xkb.variant = "nativo";
 
     # Console
     console = {
       font = "Lat2-Terminus16";
       # keyMap = "us";
-      #useXkbConfig = true; # use xkb.options in tty.
+      useXkbConfig = true; # use xkb.options in tty.
     };
     programs.zsh.enable = true;
     environment.shells = [ pkgs.zsh ];
