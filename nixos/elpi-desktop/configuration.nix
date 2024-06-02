@@ -361,7 +361,7 @@ let
 
     users.users.elpi = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" ]; # "wheel" for sudo access
+      extraGroups = [ "wheel" "networkmanager" "bluetooth" ]; # "wheel" for sudo access
       initialPassword = "password";
       shell = pkgs.zsh;
     };
