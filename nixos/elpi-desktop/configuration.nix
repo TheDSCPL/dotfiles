@@ -123,11 +123,12 @@ let
     # NVIDIA
     services.xserver.videoDrivers = lib.mkForce [ "nvidia" ];
     services.xserver.deviceSection = ''
-      BusID "${config.hardware.nvidia.prime.nvidiaBusId}"
+      BusID          "${config.hardware.nvidia.prime.nvidiaBusId}"
       VendorName     "NVIDIA Corporation"
       BoardName      "GeForce RTX 3090"
       Option         "NoLogo" "true"
       Option         "UseDisplayDevice" "DFP-5"
+      Option         "AllowEmptyInitialConfiguration"
     '';
 
     hardware = {
