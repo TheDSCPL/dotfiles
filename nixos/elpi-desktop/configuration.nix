@@ -360,7 +360,15 @@ let
 
     users.users.elpi = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "bluetooth" ]; # "wheel" for sudo access
+      extraGroups = [
+        # "wheel" for sudo access
+        "wheel"
+        "networkmanager"
+        "bluetooth"
+        "lp"
+        "users"
+        "kvm"
+      ] ++ lib.optional config.programs.gamemode.enable [ "gamemode" ];
       initialPassword = "password";
       shell = pkgs.zsh;
     };
