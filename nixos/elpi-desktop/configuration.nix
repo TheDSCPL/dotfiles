@@ -152,6 +152,7 @@ let
           #intel-media-driver  # LIBVA_DRIVER_NAME = "iHD"
           vaapiVdpau
           libvdpau-va-gl
+          libva-utils
           # Vulkan
           vulkan-tools
           # DirectX 9, 10 and 11
